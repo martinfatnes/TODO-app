@@ -1,7 +1,6 @@
 {
   "name": "todo-app",
   "version": "1.0.0",
-  "description": "",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -11,5 +10,14 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VegardGronas/TODO-app.git"
+  },
+  "bugs": {
+    "url": "https://github.com/VegardGronas/TODO-app/issues"
+  },
+  "homepage": "https://github.com/VegardGronas/TODO-app#readme",
+  "description": ""
 }
