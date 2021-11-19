@@ -9,6 +9,16 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "4.17.1"
-  }
+    "express": "4.17.1",
+    "pg": "8.7.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/martinfatnes/TODO-app.git"
+  },
+  "bugs": {
+    "url": "https://github.com/martinfatnes/TODO-app/issues"
+  },
+  "homepage": "https://github.com/martinfatnes/TODO-app#readme",
+  "description": ""
 }
