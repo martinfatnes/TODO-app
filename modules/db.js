@@ -17,8 +17,10 @@ dbMethods.updateToDoItem = function(){
 
 }
 
-dbMethods.getAllItemsForUser = function(){
-
+dbMethods.getAllCategoriesUser = function(userid){
+    const sql = "SELECT * FROM category WHERE userid = $1";
+    const values = [userid];
+    return pool.query(sql, values);
 }
 
 dbMethods.deleteItem = function(){

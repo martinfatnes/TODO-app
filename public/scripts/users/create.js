@@ -4,7 +4,13 @@ function createUserPage(){
     const username = document.createElement('input');
     const password = document.createElement('input');
     const btn = document.createElement("button");
+    username.placeholder = "Username";
+    password.placeholder = "Password";
+    username.classList = "userInputs";
+    password.classList = "userInputs";
+    password.type = "password";
     btn.innerHTML = "Create";
+    btn.classList = "userBtns";
     statusMsg.innerHTML = "Create a new user!";
     mainContainer.appendChild(statusMsg);
     mainContainer.appendChild(username);

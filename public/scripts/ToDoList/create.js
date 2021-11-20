@@ -1,9 +1,9 @@
-async function createCategory(){
+async function createCategory(categoryName){
     const url = "/api/category";
     const token = localStorage.getItem('token');
 
     const updata = {
-        header: "newasfhjdfskfgdsfasfjds"
+        header: categoryName
     }
 
     const cfg = {
@@ -32,12 +32,12 @@ async function createCategory(){
     }
 }
 
-async function deleteCategory(){
+async function deleteCategory(categoryName){
     const url = "/api/delete/category";
     const token = localStorage.getItem('token');
 
     const updata = {
-        name: "newtest5"
+        name: categoryName
     }
 
     const cfg = {
@@ -65,13 +65,13 @@ async function deleteCategory(){
     }
 }
 
-async function createContent(){
+async function createContent(categoryName, content){
     const url = "/api/content";
     const token = localStorage.getItem('token');
 
     const updata = {
-        header: "newtest5",
-        content: "heeeeej"
+        header: categoryName,
+        content: content
     }
 
     const cfg = {
