@@ -34,7 +34,8 @@ function createUserPage(){
                 statusMsg.innerHTML = data.err;
                 throw data.err;
             }
-            statusMsg.innerHTML = data.msg;
+
+            loginPage();
         }
         catch(err){
             console.log(err);

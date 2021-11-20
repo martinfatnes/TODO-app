@@ -18,8 +18,6 @@ function loginPage(){
     mainContainer.appendChild(username);
     mainContainer.appendChild(password);
     mainContainer.appendChild(btn);
-    
-    homePage();
 
     btn.addEventListener('click', async function(){
         const url = '/api/user/login';
@@ -42,6 +40,7 @@ function loginPage(){
 
             statusMsg.innerHTML = data.msg;
 
+            homePage();
         }
         catch(error){
             console.log(error);
