@@ -7,22 +7,22 @@
     </head>
 
     <body>
-        <aside id="sidebar">
-            <button onclick="loginPage()">Login</button>
-            <button onclick="createUserPage()">CreateUser</button>
-            <button onclick="deleteUser()">Delte user</button>
-        </aside>
+        <header>
+            <nav>
+                <button onclick="prevPage()" class="goBacj">Go back</button>
+            </nav>
+        </header>
 
-        <h1 id="statusMsg"></h1>
         <main id="mainContainer">
             
         </main>
 
-        <script src="scripts/view.js"></script>
+        <script src="scripts/createElements.js"></script>
         <script src="scripts/ToDoList/getlists.js"></script>
         <script src="scripts/users/create.js"></script>
         <script src="scripts/users/login.js"></script>
         <script src="scripts/users/delete.js"></script>
         <script src="scripts/ToDoList/create.js"></script>
+        <script src="scripts/view.js"></script>
     </body>
 </html>

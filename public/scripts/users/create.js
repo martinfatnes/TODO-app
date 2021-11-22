@@ -1,21 +1,17 @@
 function createUserPage(){
-    mainContainer.innerHTML = "";
-    const statusMsg = document.createElement('h1');
-    const username = document.createElement('input');
-    const password = document.createElement('input');
-    const btn = document.createElement("button");
-    username.placeholder = "Username";
-    password.placeholder = "Password";
-    username.classList = "userInputs";
-    password.classList = "userInputs";
-    password.type = "password";
-    btn.innerHTML = "Create";
-    btn.classList = "userBtns";
-    statusMsg.innerHTML = "Create a new user!";
-    mainContainer.appendChild(statusMsg);
-    mainContainer.appendChild(username);
-    mainContainer.appendChild(password);
-    mainContainer.appendChild(btn);
+    const div = document.createElement('div');
+    div.className = "users";
+    const header = createHeader("Create user");
+    const username = createInput("Username", "userInputs", "text");
+    const password = createInput("Password", "userInputs", "password");
+    const btn = createButtons("Submit", "userBtns");
+
+    div.appendChild(header);
+    div.appendChild(username);
+    div.appendChild(password);
+    div.appendChild(btn);
+
+    fillMainContainer(div);
 
     btn.addEventListener('click', async function(){
         const url = "/api/createUser";
@@ -31,11 +27,11 @@ function createUserPage(){
             const data = await respons.json();
 
             if(respons.status != 200){
-                statusMsg.innerHTML = data.err;
+                header.innerHTML = data.err;
                 throw data.err;
             }
 
-            loginPage();
+            header.innerHTML = data.msg;
         }
         catch(err){
             console.log(err);
