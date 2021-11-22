@@ -33,6 +33,7 @@ function loginPage(){
 
             localStorage.setItem('token', data.token);
             header.innerHTML = data.msg;
+            dashBoard();
         }
         catch(error){
             console.log(error);
