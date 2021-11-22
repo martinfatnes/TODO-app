@@ -10,7 +10,7 @@ router.post('/api/createUser', async (req, res, next) => {
     const cred = utils.decodeCred(credString);
 
     if(cred.username === '' || cred.password === ''){
-        res.status(400).json({error: "No username or password"}).end();
+        res.status(400).json({err: "Please fill in unsername and password"}).end();
         return;
     }
 
@@ -24,12 +24,15 @@ router.post('/api/createUser', async (req, res, next) => {
                 msg: "User created"
             })
         }
-        else{
-            throw "Could not create user"
-        }
     }
     catch(err){
-        console.log(err);
+        if(err.constraint === "username_unique"){
+            res.status(400).json({
+                err: "Username already exists"
+            }).end();
+            return;
+        }
+        next(err);
     }
 })
 
@@ -45,6 +48,12 @@ router.post('/api/user/login', async (req, res, next) => {
 
     try{
         const data = await db.getUser(cred.username);
+
+        if(data.rows.length <= 0){
+            res.status(404).json({err: "user does not exist"}).end();
+            return;
+        }
+
         const verify = utils.verifyPassword(cred.password, data.rows[0].password, data.rows[0].salt);
         const token = utils.createToken(data.rows[0].username, data.rows[0].id);
 
@@ -53,13 +62,17 @@ router.post('/api/user/login', async (req, res, next) => {
                 msg: "You are logged in",
                 token: token
             }).end();
+            return;
         }
-        else{
-            throw "Wrong password"
-        }
+        else if(data.rows.length > 0){
+            res.status(404).json({
+                err: "Wrong password"
+            }).end();
+            return;
+        }    
     }
     catch(err){
-        console.log(err);
+        next(err);
     }
 })
 
@@ -78,7 +91,7 @@ router.delete('/api/user/delete', protect, async (req, res, next) => {
         }
     }
     catch(err){
-        console.log(err);
+        next(err);
     }
 })
 

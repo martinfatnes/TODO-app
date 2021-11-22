@@ -1,32 +1,51 @@
-const usernameInpLog = document.getElementById("usernameLog");
-const passwordInpLog = document.getElementById("passwordLog");
-const btnLogin = document.getElementById("login");
+const mainContainer = document.getElementById("mainContainer");
 
+function loginPage(){
+    mainContainer.innerHTML = "";
+    const statusMsg = document.createElement('h1');
+    const username = document.createElement('input');
+    const password = document.createElement('input');
+    const btn = document.createElement("button");
+    username.placeholder = "Username";
+    password.placeholder = "Password";
+    password.type = "password";
+    username.classList = "userInputs";
+    password.classList = "userInputs";
+    btn.innerHTML = "Login";
+    btn.classList = "userBtns";
+    statusMsg.innerHTML = "Hi there!";
+    mainContainer.appendChild(statusMsg);
+    mainContainer.appendChild(username);
+    mainContainer.appendChild(password);
+    mainContainer.appendChild(btn);
 
-btnLogin.addEventListener('click', async function(){
-    const username = usernameInpLog.value;
-    const password = passwordInpLog.value;
-    const url = '/api/user/login';
-    const credString = createCredentialString(username, password);
-
-    const cfg = {
-        method: "POST",
-        headers: {'authorization': credString}
-    }
-
-    try{
-        const respons = await fetch(url, cfg);
-        const data = await respons.json();
-
-        if(respons.status != 200){
-            throw data.error;
+    btn.addEventListener('click', async function(){
+        const url = '/api/user/login';
+        const credString = createCredentialString(username.value, password.value);
+        const cfg = {
+            method: "POST",
+            headers: {'authorization': credString}
         }
 
-        localStorage.setItem('token', data.token);
-        console.log(localStorage.getItem('token'));
-        createCategory();
-    }
-    catch(err){
-        console.log(err);
-    }
-})
+        try{
+            const respons = await fetch(url, cfg);
+            const data = await respons.json();
+
+            if(respons.status != 200){
+                statusMsg.innerHTML = data.err;
+                throw data.err;
+            }
+
+            localStorage.setItem('token', data.token);
+
+            statusMsg.innerHTML = data.msg;
+
+            homePage();
+        }
+        catch(error){
+            console.log(error);
+        }
+    })
+}
+
+loginPage();

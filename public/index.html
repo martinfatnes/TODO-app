@@ -1,24 +1,25 @@
 <!DOCTYPE html>
 <html>
     <head>
-
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/stylesheet.css">
+        <link rel="shortcut icon" href="#">
     </head>
 
     <body>
-        <button onclick="deleteUser()">Delte user</button>
+        <aside id="sidebar">
+            <button onclick="loginPage()">Login</button>
+            <button onclick="createUserPage()">CreateUser</button>
+            <button onclick="deleteUser()">Delte user</button>
+        </aside>
 
-        <label for="">Username</label>
-        <input type="text" name="" id="username">
-        <label for="">Password</label>
-        <input type="text" name="" id="password">
-        <button id="create">Create User</button>
+        <h1 id="statusMsg"></h1>
+        <main id="mainContainer">
+            
+        </main>
 
-        <label for="">Username</label>
-        <input type="text" name="" id="usernameLog">
-        <label for="">Password</label>
-        <input type="text" name="" id="passwordLog">
-        <button id="login">Log in</button>
-
+        <script src="scripts/view.js"></script>
+        <script src="scripts/ToDoList/getlists.js"></script>
         <script src="scripts/users/create.js"></script>
         <script src="scripts/users/login.js"></script>
         <script src="scripts/users/delete.js"></script>
