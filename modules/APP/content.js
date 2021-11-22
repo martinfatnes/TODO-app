@@ -62,7 +62,7 @@ router.post('/api/content', protect, async (req, res, next) => {
 
 router.get('/api/category/all', protect, async (req, res, next) => {
     const userid = res.locals.userid;
-    console.log(await db.getAllCategoriesUser(userid));
+
     try{
         const data = await db.getAllCategoriesUser(userid);
         
@@ -71,6 +71,24 @@ router.get('/api/category/all', protect, async (req, res, next) => {
         }
         else{
             res.status(404).json({msg: 'You have no categories'});
+        }
+    }
+    catch(err){
+        next(err);
+    }
+})
+
+router.get('/api/content/all', protect, async (req, res, next) => {
+    const userid = res.locals.userid;
+
+    try{
+        const data = await db.getContentOfCategory(userid);
+
+        if(data.rows.length > 0){
+            res.status(200).json(data.rows);
+        }
+        else{
+            res.status(404).json({msg: "no content here"});
         }
     }
     catch(err){

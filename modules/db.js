@@ -13,6 +13,12 @@ dbMethods.createToDoItem = function(data, userid, categoryid){
     return pool.query(sql, values);
 }
 
+dbMethods.getContentOfCategory = function(userid){
+    const sql = "SELECT * FROM content WHERE userid = $1";
+    const values = [userid];
+    return pool.query(sql, values);
+}
+
 dbMethods.updateToDoItem = function(){
 
 }
