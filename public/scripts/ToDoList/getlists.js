@@ -16,14 +16,14 @@ async function getCategory(){
 
         if(respons.status != 200){
             if(respons.status === 404){
-                drawButtons(createLoginButtons());
+                
             }   
             else{
                 throw "You have no categories";
             }
         }
         else{
-            drawCategoies(data);
+            
         }
     }
     catch(err){
@@ -58,4 +58,3 @@ async function getContent(){
         console.log(err);
     }
 }
-getContent();
