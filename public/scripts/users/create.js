@@ -1,20 +1,5 @@
 function createUserPage(){
-    const div = document.createElement('div');
-    div.className = "users";
-    const header = createHeader("Create user");
-    const username = createInput("Username", "userInputs", "text");
-    const password = createInput("Password", "userInputs", "password");
-    const password2 = createInput("Password", "userInputs", "password");
-    const btn = createButtons("Submit", "userBtns");
-
-    div.appendChild(header);
-    div.appendChild(username);
-    div.appendChild(password);
-    div.appendChild(password2);
-    div.appendChild(btn);
-
-    fillMainContainer(div);
-
+    
     btn.addEventListener('click', async function(){
         if(password.value === password2.value){
             const url = "/api/createUser";

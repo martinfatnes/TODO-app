@@ -1,18 +1,5 @@
 function loginPage(){
-    const div = document.createElement('div');
-    div.className = "users";
-    const header = createHeader("Login");
-    const username = createInput("Username", "userInputs", "text");
-    const password = createInput("Password", "userInputs", "password");
-    const btn = createButtons("Login", "userBtns");
-
-    div.appendChild(header);
-    div.appendChild(username);
-    div.appendChild(password);
-    div.appendChild(btn);
-
-    fillMainContainer(div);
-
+    
     btn.addEventListener('click', async function(){
         const url = '/api/user/login';
         const credString = createCredentialString(username.value, password.value);

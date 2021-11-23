@@ -26,18 +26,7 @@ async function deleteUser(){
 }
 
 function changePassword(){
-    const div = document.createElement('div');
-    const header = createHeader("StatusMsg");
-    const password = createInput("New password", "userInp", "password");
-    const password2 = createInput("New password", "userInp", "password");
-    const btn = createButtons("Submit", "userBtn");
-    div.className = "users";
-    div.appendChild(header);
-    div.appendChild(password);
-    div.appendChild(password2);
-    div.appendChild(btn);
-    fillMainContainer(div);
-
+    
     btn.addEventListener('click', async function(){
         if(password.value === password2.value){
             const url = "/apu/user/update/password";
@@ -73,32 +62,4 @@ function changePassword(){
             header.innerHTML = "Type same password";
         }
     })
-}
-
-async function changeUsername(){
-    
-}
-
-async function getUserInfo(){
-
-}
-
-function dashBoard(){
-    const div = document.createElement('div');
-    div.className = "users";
-    const changePass = createButtons("Change password", "userBtn");
-    const delUser = createButtons("Delete user", "userBtn");
-
-    div.appendChild(changePass);
-    div.appendChild(delUser);
-
-    fillMainContainer(div);
-
-    changePass.addEventListener('click', function(){
-        changePassword();
-    })
-
-    delUser.addEventListener('click', function(){
-        deleteUser();
-    });
 }
