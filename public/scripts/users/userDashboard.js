@@ -1,3 +1,25 @@
+function dashBoard(){
+    const formBtn = document.getElementById("formBtn");
+    const form = document.getElementById("form");
+    const password = document.getElementById('password');
+    const securityPassword = document.getElementById("securityPassword");
+
+    const changePasswordBtn = document.getElementById("submit");
+
+    changePasswordBtn.addEventListener('click', function(){
+        changePassword(password.value, securityPassword.value);
+    })
+
+    formBtn.addEventListener('click', function(){
+        if(form.style.display === "none"){
+            form.style.display = "grid";
+        }
+        else{
+            form.style.display = "none";
+        }
+    })
+}
+
 async function deleteUser(){
     const url = "/api/user/delete";
     const token = localStorage.getItem('token');
@@ -25,41 +47,38 @@ async function deleteUser(){
     }
 }
 
-function changePassword(){
-    
-    btn.addEventListener('click', async function(){
-        if(password.value === password2.value){
-            const url = "/apu/user/update/password";
-            const token = localStorage.getItem('token');
-            
-            const updata = {
-                password: password.value
-            }
+async function changePassword(password, securityPassword){
+    if(password === securityPassword){
+        const url = "/apu/user/update/password";
+        const token = localStorage.getItem('token');
         
-            const cfg = {
-                method: "PUT",
-                headers: {
-                    "content-type":"application/json",
-                    "autorization": token},
-                body: JSON.stringify(updata)
-            }
-        
-            try{
-                const result = await fetch(url, cfg);
-                const data = await result.json();
-        
-                if(result.status != 200){
-                    throw data.err;
-                }
-    
-                header.innerHTML = data.msg;
-            }
-            catch(err){
-                console.log(err);
-            }
+        const updata = {
+            password: password
         }
-        else{
-            header.innerHTML = "Type same password";
+    
+        const cfg = {
+            method: "PUT",
+            headers: {
+                "content-type":"application/json",
+                "autorization": token},
+            body: JSON.stringify(updata)
         }
-    })
+    
+        try{
+            const result = await fetch(url, cfg);
+            const data = await result.json();
+    
+            if(result.status != 200){
+                throw data.err;
+            }
+
+            console.log(data.msg);
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
+    else{
+        console.log("type same value");
+    }
 }

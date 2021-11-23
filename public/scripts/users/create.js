@@ -1,7 +1,12 @@
 function createUserPage(){
-    
+    const statusMsg = document.getElementById("statusMsg");
+    const btn = document.getElementById("submit");
+    const username = document.getElementById("username");
+    const password = document.getElementById("password");
+    const securityPassword = document.getElementById("securityPassword");
+
     btn.addEventListener('click', async function(){
-        if(password.value === password2.value){
+        if(password.value === securityPassword.value){
             const url = "/api/createUser";
             const credString = createCredentialString(username.value, password.value);
     
@@ -15,18 +20,18 @@ function createUserPage(){
                 const data = await respons.json();
     
                 if(respons.status != 200){
-                    header.innerHTML = data.err;
+                    statusMsg.innerHTML = data.err;
                     throw data.err;
                 }
     
-                header.innerHTML = data.msg;
+                statusMsg.innerHTML = data.msg;
             }
             catch(err){
                 console.log(err);
             }
         }
         else{
-            header.innerHTML = "Inpu fields have to be the same";
+            statusMsg.innerHTML = "Inpu fields have to be the same";
         }
     })
 }

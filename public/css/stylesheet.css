@@ -54,3 +54,64 @@ main{
     border: solid green 1px;
     padding: 100px;
 }
+
+/*Aside menu*/
+
+aside{
+    position: fixed;
+    background-color: rgb(31, 31, 31);
+    height: 100%;
+}
+
+.sideMenu{
+    display: grid;
+    grid-template-columns: 200px;
+    grid-template-rows: 50px 50px 100px 50px;
+}
+
+#dashboardMenu{
+    grid-area: "dashboardMenu";
+}
+
+.collapsible{
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+}
+
+.active, .collapsible:hover {
+    background-color: #ccc;
+}
+
+.content {
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+    background-color: #f1f1f1;
+}
+
+#dashboardMenu{
+    display: none;
+}
+
+
+/*Account home page thing*/
+.accountPage{
+    display: grid;
+    grid-template-columns: auto;
+    background-color:darkseagreen;
+    border: solid green 1px;
+    padding: 100px;
+}
+
+#formBtn:hover{
+    background-color: rgb(84, 134, 84);
+    cursor: pointer;
+}
+  
