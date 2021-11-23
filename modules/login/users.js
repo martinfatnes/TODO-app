@@ -95,4 +95,34 @@ router.delete('/api/user/delete', protect, async (req, res, next) => {
     }
 })
 
+//UPDATE USER PASSWORD
+router.put('/apu/user/update/password', protect, async (req, res, next) => {
+    const userid = res.locals.userid;
+    const username = res.locals.username;
+    const updata = req.body;
+
+    try{
+
+        const hash = utils.createHash(updata.password);
+
+        const checkSame = await db.getUser(username);
+        
+        const verify = utils.verifyPassword(updata.password, checkSame.rows[0].password, checkSame.rows[0].salt);
+
+        if(!verify){
+            const data = await db.changePassword(userid, hash.salt, hash.value);
+
+            if(data.rows.length > 0){
+                res.status(200).json({msg: "Password updated"}).end();
+            }
+        }
+        else{
+            res.status(400).json({err: "Cant change to same password"}).end();
+        }
+    }
+    catch(err){
+        next(err);
+    }
+})
+
 module.exports = router;

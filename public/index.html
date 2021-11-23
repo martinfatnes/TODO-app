@@ -9,20 +9,23 @@
     <body>
         <header>
             <nav>
-                <button onclick="prevPage()" class="goBacj">Go back</button>
+                <button onclick="LoadLoginPage()">Login</button>
+                <button onclick="LoadCreateUser()">Signup</button>
+                <button onclick="LoadHomepage()">Homepage</button>
+                <button onclick="LoadDashboard()">Dashboard</button>
             </nav>
         </header>
 
-        <main id="mainContainer">
+        <main id="content">
             
         </main>
 
-        <script src="scripts/createElements.js"></script>
-        <script src="scripts/ToDoList/getlists.js"></script>
         <script src="scripts/users/create.js"></script>
         <script src="scripts/users/login.js"></script>
-        <script src="scripts/users/delete.js"></script>
+        <script src="scripts/users/userDashboard.js"></script>
         <script src="scripts/ToDoList/create.js"></script>
-        <script src="scripts/view.js"></script>
+        <script src="scripts/ToDoList/getlists.js"></script>
+        <script src="scripts/settings.js"></script>
+        <script src="scripts/loadContent.js"></script>
     </body>
 </html>

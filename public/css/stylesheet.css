@@ -45,3 +45,12 @@ main{
     background-color: green;
     padding: 10px;
 }
+
+/*HOMEPAGE CONTENT STUFF*/
+.homepage{
+    display: grid;
+    grid-template-columns: auto;
+    background-color:darkseagreen;
+    border: solid green 1px;
+    padding: 100px;
+}
