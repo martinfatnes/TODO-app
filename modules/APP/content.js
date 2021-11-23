@@ -24,11 +24,10 @@ router.post('/api/category', protect, async (req, res, next) => {
 
 router.delete('/api/delete/category', protect, async (req, res, next) => {
     const updata = req.body;
-    const userid = res.locals.userid;
+    const username = res.locals.username;
 
     try{
-        const data = await db.deleteCategory(updata.name, userid);
-
+        const data = await db.deleteCategory(updata.name, username);
         if(data.rows.length > 0){
             res.status(200).json({msg: 'Deletd category'});
         }
