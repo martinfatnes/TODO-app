@@ -7,9 +7,9 @@ const pool = new pg.Pool({
 })
 const dbMethods = {};
 
-dbMethods.createToDoItem = function(data, userid, categoryid){
-    const sql = "INSERT INTO content (id, data, userid, categoryid) VALUES(DEFAULT, $1, $2, $3) RETURNING *";
-    const values = [data, userid, categoryid];
+dbMethods.createToDoItem = function(content, username, categoryid){
+    const sql = "INSERT INTO content (id, content, username, categoryid) VALUES(DEFAULT, $1, $2, $3) RETURNING *";
+    const values = [content, username, categoryid];
     return pool.query(sql, values);
 }
 
@@ -33,21 +33,21 @@ dbMethods.deleteItem = function(){
 
 }
 
-dbMethods.createCategory = function(header, userid){
-    const sql = "INSERT INTO category (id, name, userid) VALUES(DEFAULT, $1, $2) RETURNING *";
-    const values = [header, userid];
+dbMethods.createCategory = function(name, username){
+    const sql = "INSERT INTO category (id, name, username) VALUES(DEFAULT, $1, $2) RETURNING *";
+    const values = [name, username];
     return pool.query(sql, values);
 }
 
-dbMethods.getCategory = function(header, userid){
-    const sql = "SELECT * FROM category WHERE name = $1 AND userid = $2";
-    const values = [header, userid];
+dbMethods.getCategory = function(name, username){
+    const sql = "SELECT * FROM category WHERE name = $1 AND username = $2";
+    const values = [name, username];
     return pool.query(sql, values);
 }
 
-dbMethods.deleteCategory = function(name, userid){
-    const sql = 'DELETE FROM category WHERE name = $1 AND userid = $2 RETURNING *';
-    const values = [name, userid];
+dbMethods.deleteCategory = function(name, username){
+    const sql = 'DELETE FROM category WHERE name = $1 AND username = $2 RETURNING *';
+    const values = [name, username];
     return pool.query(sql, values);
 }
 

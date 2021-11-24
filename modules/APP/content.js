@@ -5,10 +5,10 @@ const router = express.Router();
 
 router.post('/api/category', protect, async (req, res, next) => {
     const updata = req.body;
-    const userid = res.locals.userid;
+    const username = res.locals.username;
 
     try{
-        const data = await db.createCategory(updata.header, userid);
+        const data = await db.createCategory(updata.header, username);
         
         if(data.rows.length > 0){
             res.status(200).json({msg: 'Added category'});
@@ -24,11 +24,10 @@ router.post('/api/category', protect, async (req, res, next) => {
 
 router.delete('/api/delete/category', protect, async (req, res, next) => {
     const updata = req.body;
-    const userid = res.locals.userid;
+    const username = res.locals.username;
 
     try{
-        const data = await db.deleteCategory(updata.name, userid);
-
+        const data = await db.deleteCategory(updata.name, username);
         if(data.rows.length > 0){
             res.status(200).json({msg: 'Deletd category'});
         }
@@ -43,10 +42,11 @@ router.delete('/api/delete/category', protect, async (req, res, next) => {
 
 router.post('/api/content', protect, async (req, res, next) => {
     const updata = req.body;
-    const userid = res.locals.userid;
+    const username = res.locals.username;
+
     try{
-        const categoryid = await db.getCategory(updata.header, userid);
-        const data = await db.createToDoItem(updata.content, userid, categoryid.rows[0].id);
+        const categoryid = await db.getCategory(updata.header, username);
+        const data = await db.createToDoItem(updata.content, username, categoryid.rows[0].id);
         
         if(data.rows.length > 0 || categoryid.rows.length > 0){
             res.status(200).json({msg: 'Added content'});

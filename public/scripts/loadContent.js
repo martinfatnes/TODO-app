@@ -1,42 +1,68 @@
 const container = document.getElementById("content");
+const loginInfo = document.getElementById('login');
+const menu = document.getElementById("menu");
+const dashboardItems = document.getElementById("dashboardMenu");
 
-async function refreshContent(url){
+async function refreshContent(url, page){
+    container.innerHTML = "";
+    if(localStorage.getItem("token")){
+        menu.style.display = "grid"; 
+        loginInfo.style.display = "none";
+    }
+    else{
+        menu.style.display = "none"; 
+        loginInfo.style.display = "grid";
+    }
+
     try{
         const respons = await fetch(url);
         const data = await respons.text();
         const parser = new DOMParser();
         const contentDiv = parser.parseFromString(data, "text/html");
-
-        return contentDiv.querySelector('div');
+        divBody = contentDiv.querySelector('div');
+        container.appendChild(divBody);
+        page();
     }
     catch(err){
         console.error(err);
     }
 }
 
-async function fillMain(url){
-    container.innerHTML = "";
-    try{
-        const respons = await refreshContent(url);
-        container.appendChild(respons);
+async function LoadLoginPage(){
+    refreshContent(LOGIN, loginPage);
+}
+
+async function LoadDashboard(){
+    refreshContent(DASHBOARD, dashBoard);
+}
+
+async function LoadCreateUser(){
+    refreshContent(SIGNUP, createUserPage);
+}
+
+async function LoadHomepage(){
+    refreshContent(HOMEPAGE, homePage);
+}
+
+function LogOut(){
+    localStorage.removeItem("token");
+    LoadLoginPage();
+}
+
+function callapsItems(){
+    if(dashboardItems.style.display === "grid"){
+        dashboardItems.style.display = "none";
     }
-    catch(err){
-        console.error(err);
+    else{
+        dashboardItems.style.display = "grid";
     }
 }
 
-function LoadLoginPage(){
-    fillMain(LOGIN);
-}
-
-function LoadDashboard(){
-    fillMain(DASHBOARD);
-}
-
-function LoadCreateUser(){
-    fillMain(SIGNUP);
-}
-
-function LoadHomepage(){
-    fillMain(HOMEPAGE);
+window.onload = function(){
+    if(localStorage.getItem("token")){
+        LoadHomepage();
+    }
+    else{
+        LoadLoginPage();
+    }
 }
