@@ -8,7 +8,7 @@ router.post('/api/category', protect, async (req, res, next) => {
     const username = res.locals.username;
 
     try{
-        const data = await db.createCategory(updata.header, username);
+        const data = await db.createCategory(updata.header, username, updata.shareStatus);
         
         if(data.rows.length > 0){
             res.status(200).json({msg: 'Added category'});
@@ -46,7 +46,7 @@ router.post('/api/content', protect, async (req, res, next) => {
 
     try{
         const categoryid = await db.getCategory(updata.header, username);
-        const data = await db.createToDoItem(updata.content, username, categoryid.rows[0].id);
+        const data = await db.createToDoItem(updata.content, username, categoryid.rows[0].id, updata.shareStatus);
         
         if(data.rows.length > 0 || categoryid.rows.length > 0){
             res.status(200).json({msg: 'Added content'});

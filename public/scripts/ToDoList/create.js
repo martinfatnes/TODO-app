@@ -1,9 +1,10 @@
-async function createCategory(categoryName){
+async function createCategory(categoryName, public){
     const url = "/api/category";
     const token = localStorage.getItem('token');
 
     const updata = {
-        header: categoryName
+        header: categoryName,
+        shareStatus: public 
     }
 
     const cfg = {
@@ -64,13 +65,14 @@ async function deleteCategory(categoryName){
     }
 }
 
-async function createContent(categoryName, content){
+async function createContent(categoryName, content, public){
     const url = "/api/content";
     const token = localStorage.getItem('token');
 
     const updata = {
         header: categoryName,
-        content: content
+        content: content,
+        shareStatus: public 
     }
 
     const cfg = {
