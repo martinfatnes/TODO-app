@@ -7,9 +7,9 @@ const pool = new pg.Pool({
 })
 const dbMethods = {};
 
-dbMethods.createToDoItem = function(content, username, categoryid){
-    const sql = "INSERT INTO content (id, content, username, categoryid) VALUES(DEFAULT, $1, $2, $3) RETURNING *";
-    const values = [content, username, categoryid];
+dbMethods.createToDoItem = function(content, username, categoryid, share){
+    const sql = "INSERT INTO content (id, content, username, categoryid, share) VALUES(DEFAULT, $1, $2, $3, $4) RETURNING *";
+    const values = [content, username, categoryid, share];
     return pool.query(sql, values);
 }
 
@@ -33,9 +33,9 @@ dbMethods.deleteItem = function(){
 
 }
 
-dbMethods.createCategory = function(name, username){
-    const sql = "INSERT INTO category (id, name, username) VALUES(DEFAULT, $1, $2) RETURNING *";
-    const values = [name, username];
+dbMethods.createCategory = function(name, username, share){
+    const sql = "INSERT INTO category (id, name, username, share) VALUES(DEFAULT, $1, $2, $3) RETURNING *";
+    const values = [name, username, share];
     return pool.query(sql, values);
 }
 

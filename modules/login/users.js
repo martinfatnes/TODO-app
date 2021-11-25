@@ -65,7 +65,7 @@ router.post('/api/user/login', async (req, res, next) => {
             return;
         }
         else if(data.rows.length > 0){
-            res.status(404).json({
+            res.status(400).json({
                 err: "Wrong password"
             }).end();
             return;
