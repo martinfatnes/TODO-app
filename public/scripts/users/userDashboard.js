@@ -48,6 +48,7 @@ async function deleteUser(){
 }
 
 async function changePassword(password, securityPassword){
+    const statusMsg = document.getElementById('formBtn');
     if(password === securityPassword){
         const url = "/apu/user/update/password";
         const token = localStorage.getItem('token');
@@ -71,8 +72,7 @@ async function changePassword(password, securityPassword){
             if(result.status != 200){
                 throw data.err;
             }
-
-            console.log(data.msg);
+            statusMsg.innerHTML = data.msg;
         }
         catch(err){
             console.log(err);

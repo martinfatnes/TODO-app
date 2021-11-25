@@ -6,9 +6,8 @@ const router = express.Router();
 router.post('/api/category', protect, async (req, res, next) => {
     const updata = req.body;
     const username = res.locals.username;
-
     try{
-        const data = await db.createCategory(updata.header, username);
+        const data = await db.createCategory(updata.header, username, updata.shareStatus);
         
         if(data.rows.length > 0){
             res.status(200).json({msg: 'Added category'});
@@ -46,7 +45,7 @@ router.post('/api/content', protect, async (req, res, next) => {
 
     try{
         const categoryid = await db.getCategory(updata.header, username);
-        const data = await db.createToDoItem(updata.content, username, categoryid.rows[0].id);
+        const data = await db.createToDoItem(updata.content, username, categoryid.rows[0].id, updata.shareStatus);
         
         if(data.rows.length > 0 || categoryid.rows.length > 0){
             res.status(200).json({msg: 'Added content'});
@@ -80,13 +79,29 @@ router.get('/api/category/all', protect, async (req, res, next) => {
 
 router.get('/api/category/public', protect, async (req, res, next) => {
     const username = res.locals.username;
-    const updata = req.body;
-
     try{
-        const data = await db.getPublicCategory(username, updata.public);
+        const data = await db.getPublicCategory(username);
 
         if(data.rows.length > 0){
             res.status(200).json(data.rows);
+        }
+    }
+    catch(err){
+        next(err);
+    }
+})
+
+router.get('/api/content/public/:id', async (req, res, next) => {
+    const categoryid = req.params.id;
+
+    try{
+        const data = await db.getPublicContent(categoryid);
+        
+        if(data.rows.length > 0){
+            res.status(200).json(data.rows);
+        }
+        else{
+            res.status(404).json({msg: "This category has no content"});
         }
     }
     catch(err){

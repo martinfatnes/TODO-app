@@ -44,6 +44,10 @@ async function LoadHomepage(){
     refreshContent(HOMEPAGE, homePage);
 }
 
+async function LoadPublic(){
+    refreshContent(PUBLIC, getCategoryPublic);
+}
+
 function LogOut(){
     localStorage.removeItem("token");
     LoadLoginPage();
