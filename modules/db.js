@@ -51,6 +51,12 @@ dbMethods.deleteCategory = function(name, username){
     return pool.query(sql, values);
 }
 
+dbMethods.getPublicCategory = function(username){
+    const sql = 'SELECT * FROM category WHERE username = $1 AND share = true';
+    const values = [username];
+    return pool.query(sql, values);
+}
+
 //USERS---------------------------------------------------
 
 dbMethods.createUser = function(username, password, salt){

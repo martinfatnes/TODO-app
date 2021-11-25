@@ -31,7 +31,6 @@ async function getCategory(){
     }
 }
 
-
 async function getContent(){
     const url = "/api/content/all";
     const token = localStorage.getItem('token');
@@ -58,3 +57,32 @@ async function getContent(){
         console.log(err);
     }
 }
+
+async function getCategoryPublic(){
+    const url = "/api/category/public/";
+    const token = localStorage.getItem('token');
+
+    const cfg = {
+        method: "GET",
+        headers: {
+            "content-type":"application/json",
+            "autorization": token
+        }
+    }
+
+    try{
+        const respons = await fetch(url, cfg);
+        const data = await respons.json();
+
+        if(respons.status != 200){
+            throw "No public category";
+        }
+
+        console.log(data);
+    }
+    catch(err){
+        console.log(err);
+    }
+}
+
+getCategoryPublic();

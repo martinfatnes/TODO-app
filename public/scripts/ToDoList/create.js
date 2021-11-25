@@ -1,9 +1,10 @@
-async function createCategory(categoryName){
+async function createCategory(categoryName, public){
     const url = "/api/category";
     const token = localStorage.getItem('token');
 
     const updata = {
-        header: categoryName
+        header: categoryName,
+        share: public
     }
 
     const cfg = {
@@ -30,6 +31,8 @@ async function createCategory(categoryName){
         console.log(err);
     }
 }
+
+createCategory("Tester", true);
 
 async function deleteCategory(categoryName){
     const url = "/api/delete/category";

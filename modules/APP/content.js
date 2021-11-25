@@ -78,6 +78,23 @@ router.get('/api/category/all', protect, async (req, res, next) => {
     }
 })
 
+router.get('/api/category/public', protect, async (req, res, next) => {
+    const username = res.locals.username;
+    const updata = req.body;
+
+    try{
+        const data = await db.getPublicCategory(username, updata.public);
+
+        if(data.rows.length > 0){
+            res.status(200).json(data.rows);
+        }
+    }
+    catch(err){
+        next(err);
+    }
+})
+
+
 router.get('/api/content/all', protect, async (req, res, next) => {
     const userid = res.locals.userid;
 
