@@ -4,7 +4,7 @@ async function createCategory(categoryName, public){
 
     const updata = {
         header: categoryName,
-        shareStatus: public 
+        shareStatus: public
     }
 
     const cfg = {

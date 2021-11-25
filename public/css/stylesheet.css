@@ -115,3 +115,28 @@ aside{
     cursor: pointer;
 }
   
+
+/* Public list*/
+.publicList{
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+
+    background-color:darkseagreen;
+    border: solid green 1px;
+    padding: 100px;
+}
+
+.publicList>div{
+    margin: 10px;
+    text-align: center;
+    border: solid black 1px;
+    padding: 5px;
+    cursor: pointer;
+
+    background-color: burlywood;
+}
+
+.publicList>div:hover{
+    background-color: cadetblue;
+}
+

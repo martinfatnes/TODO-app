@@ -6,7 +6,6 @@ const router = express.Router();
 router.post('/api/category', protect, async (req, res, next) => {
     const updata = req.body;
     const username = res.locals.username;
-
     try{
         const data = await db.createCategory(updata.header, username, updata.shareStatus);
         
@@ -77,6 +76,39 @@ router.get('/api/category/all', protect, async (req, res, next) => {
         next(err);
     }
 })
+
+router.get('/api/category/public', protect, async (req, res, next) => {
+    const username = res.locals.username;
+    try{
+        const data = await db.getPublicCategory(username);
+
+        if(data.rows.length > 0){
+            res.status(200).json(data.rows);
+        }
+    }
+    catch(err){
+        next(err);
+    }
+})
+
+router.get('/api/content/public/:id', async (req, res, next) => {
+    const categoryid = req.params.id;
+
+    try{
+        const data = await db.getPublicContent(categoryid);
+        
+        if(data.rows.length > 0){
+            res.status(200).json(data.rows);
+        }
+        else{
+            res.status(404).json({msg: "This category has no content"});
+        }
+    }
+    catch(err){
+        next(err);
+    }
+})
+
 
 router.get('/api/content/all', protect, async (req, res, next) => {
     const userid = res.locals.userid;
