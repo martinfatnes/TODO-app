@@ -28,6 +28,10 @@ async function refreshContent(url, page){
     }
 }
 
+async function LoadCategory(){
+    refreshContent(CRATE_CATEGORY, categoryPage);
+}
+
 async function LoadLoginPage(){
     refreshContent(LOGIN, loginPage);
 }

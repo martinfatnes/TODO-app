@@ -60,10 +60,10 @@ router.post('/api/content', protect, async (req, res, next) => {
 })
 
 router.get('/api/category/all', protect, async (req, res, next) => {
-    const userid = res.locals.userid;
+    const username = res.locals.username;
 
     try{
-        const data = await db.getAllCategoriesUser(userid);
+        const data = await db.getAllCategoriesUser(username);
         
         if(data.rows.length > 0){
             res.status(200).json(data.rows);
