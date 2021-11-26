@@ -45,7 +45,7 @@ async function getContent(){
             throw "You have not content";
         }
 
-        console.log(data);
+        return data;
     }
     catch(err){
         console.log(err);
