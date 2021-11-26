@@ -15,16 +15,10 @@ async function getCategory(){
         const data = await respons.json();
 
         if(respons.status != 200){
-            if(respons.status === 404){
-                
-            }   
-            else{
-                throw "You have no categories";
-            }
+            throw "You have no categories";
         }
-        else{
-            
-        }
+        
+        return data;
     }
     catch(err){
         console.log(err);
