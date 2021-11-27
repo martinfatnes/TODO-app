@@ -18,6 +18,7 @@ main{
 
 .users{
     display: grid;
+    grid-template-columns:  auto;
     padding: 100px;
 }
 
@@ -136,3 +137,4 @@ header>div{
 .publicList>div:hover{
     background-color: cadetblue;
 }
+

@@ -42,6 +42,7 @@ router.delete('/api/delete/category', protect, async (req, res, next) => {
 router.post('/api/content', protect, async (req, res, next) => {
     const updata = req.body;
     const username = res.locals.username;
+    console.log(updata);
 
     try{
         const categoryid = await db.getCategory(updata.header, username);

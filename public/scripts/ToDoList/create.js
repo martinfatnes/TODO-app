@@ -68,7 +68,7 @@ async function deleteCategory(categoryName){
 async function createContent(categoryName, content, public){
     const url = "/api/content";
     const token = localStorage.getItem('token');
-
+    
     const updata = {
         header: categoryName,
         content: content,
@@ -84,6 +84,8 @@ async function createContent(categoryName, content, public){
         body: JSON.stringify(updata)
     }
 
+
+    console.log(await fetch(url, cfg));
     try{
         const respons = await fetch(url, cfg);
         const data = await respons.json();

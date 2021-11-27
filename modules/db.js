@@ -8,8 +8,15 @@ const pool = new pg.Pool({
 const dbMethods = {};
 
 dbMethods.createToDoItem = function(content, username, categoryid, share){
+    console.log(categoryid);
+    if(categoryid){
+        const sql = "INSERT INTO content (id, content, username, categoryid, share) VALUES(DEFAULT, $1, $2, $3, $4) RETURNING *";
+        const values = [content, username, categoryid, share];
+        return pool.query(sql, values);   
+    }
+    
     const sql = "INSERT INTO content (id, content, username, categoryid, share) VALUES(DEFAULT, $1, $2, $3, $4) RETURNING *";
-    const values = [content, username, categoryid, share];
+    const values = [content, username, null, share];
     return pool.query(sql, values);
 }
 

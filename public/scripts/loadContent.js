@@ -48,6 +48,10 @@ async function LoadHomepage(){
     refreshContent(PUBLIC, getCategoryPublic);
 }
 
+async function flash(){
+    refreshContent(FLASH, toDoClient);
+}
+
 /*
 async function LoadPublic(){
     refreshContent(PUBLIC, getCategoryPublic);
