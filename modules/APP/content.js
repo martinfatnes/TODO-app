@@ -61,7 +61,7 @@ router.post('/api/content', protect, async (req, res, next) => {
 
 router.get('/api/category/all', protect, async (req, res, next) => {
     const username = res.locals.username;
-
+    
     try{
         const data = await db.getAllCategoriesUser(username);
         
@@ -111,10 +111,10 @@ router.get('/api/content/public/:id', async (req, res, next) => {
 
 
 router.get('/api/content/all', protect, async (req, res, next) => {
-    const userid = res.locals.userid;
+    const username = res.locals.username;
 
     try{
-        const data = await db.getContentOfCategory(userid);
+        const data = await db.getContentOfCategory(username);
 
         if(data.rows.length > 0){
             res.status(200).json(data.rows);

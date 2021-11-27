@@ -13,9 +13,9 @@ dbMethods.createToDoItem = function(content, username, categoryid, share){
     return pool.query(sql, values);
 }
 
-dbMethods.getContentOfCategory = function(userid){
-    const sql = "SELECT * FROM content WHERE userid = $1";
-    const values = [userid];
+dbMethods.getContentOfCategory = function(username){
+    const sql = "SELECT * FROM content WHERE username = $1";
+    const values = [username];
     return pool.query(sql, values);
 }
 

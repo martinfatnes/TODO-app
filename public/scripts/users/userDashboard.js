@@ -1,25 +1,3 @@
-function dashBoard(){
-    const formBtn = document.getElementById("formBtn");
-    const form = document.getElementById("form");
-    const password = document.getElementById('password');
-    const securityPassword = document.getElementById("securityPassword");
-
-    const changePasswordBtn = document.getElementById("submit");
-
-    changePasswordBtn.addEventListener('click', function(){
-        changePassword(password.value, securityPassword.value);
-    })
-
-    formBtn.addEventListener('click', function(){
-        if(form.style.display === "none"){
-            form.style.display = "grid";
-        }
-        else{
-            form.style.display = "none";
-        }
-    })
-}
-
 async function deleteUser(){
     const url = "/api/user/delete";
     const token = localStorage.getItem('token');
@@ -81,4 +59,40 @@ async function changePassword(password, securityPassword){
     else{
         console.log("type same value");
     }
+}
+
+async function dashBoard(){
+    const formBtn = document.getElementById("formBtn");
+    const form = document.getElementById("form");
+    const password = document.getElementById('password');
+    const securityPassword = document.getElementById("securityPassword");
+    const posts = document.getElementById('posts');
+    const dispayUsername = document.getElementById('username');
+    const changePasswordBtn = document.getElementById("submit");
+
+    try{
+
+        const postsInfo = await getContent();
+        const category = await getCategory();
+        posts.innerHTML = ` Posted to do items: ${postsInfo.length}<br>
+                            Posted Categories: ${category.length}
+        `;
+        dispayUsername.innerHTML = `Username: ${postsInfo[0].username}`;
+    }
+    catch(err){
+        console.log(err);
+    }
+
+    changePasswordBtn.addEventListener('click', function(){
+        changePassword(password.value, securityPassword.value);
+    })
+
+    formBtn.addEventListener('click', function(){
+        if(form.style.display === "none"){
+            form.style.display = "grid";
+        }
+        else{
+            form.style.display = "none";
+        }
+    })
 }
