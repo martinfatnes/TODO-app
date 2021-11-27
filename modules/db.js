@@ -23,9 +23,18 @@ dbMethods.updateToDoItem = function(){
 
 }
 
+///------------------CAtegory
+
 dbMethods.getAllCategoriesUser = function(userid){
     const sql = "SELECT * FROM category WHERE userid = $1";
     const values = [userid];
+    return pool.query(sql, values);
+}
+
+dbMethods.getCategoryPublic = function(userid, public){
+    const sql = "SELECT * FROM category WHERE username = $1 AND share = $2";
+    const values = [userid, public];
+    console.log(userid, public);
     return pool.query(sql, values);
 }
 

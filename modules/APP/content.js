@@ -78,6 +78,22 @@ router.get('/api/category/all', protect, async (req, res, next) => {
     }
 })
 
+router.get('api/category/pub', protect, async (req, res, next) => {
+    const userid = res.locals.userid;
+    console.log(userid);
+
+    try{
+        const data = await db.getCategoryPublic(userid, true);
+
+        if(data.rows.length > 0){
+            res.status(200).json(data.rows);
+        }
+    }
+    catch(err){
+        next(err);
+    }
+})
+
 router.get('/api/content/all', protect, async (req, res, next) => {
     const userid = res.locals.userid;
 

@@ -65,6 +65,8 @@ async function deleteCategory(categoryName){
     }
 }
 
+deleteCategory("Test");
+
 async function createContent(categoryName, content, public){
     const url = "/api/content";
     const token = localStorage.getItem('token');
@@ -72,7 +74,7 @@ async function createContent(categoryName, content, public){
     const updata = {
         header: categoryName,
         content: content,
-        shareStatus: public 
+        shareStatus: public
     }
 
     const cfg = {
@@ -99,3 +101,5 @@ async function createContent(categoryName, content, public){
         console.log(err);
     }
 }
+
+
