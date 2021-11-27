@@ -51,8 +51,10 @@ dbMethods.getCategoryPublic = function(userid, public){
     return pool.query(sql, values);
 }
 
-dbMethods.deleteItem = function(){
-
+dbMethods.deleteItem = function(username, id){
+    const sql = "DELETE FROM content WHERE username = $1 AND id = $2";
+    const values = [username, id];
+    return pool.query(sql, values);
 }
 
 dbMethods.createCategory = function(name, username, share){

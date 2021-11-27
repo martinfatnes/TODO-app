@@ -159,7 +159,7 @@ async function getPublicCategory(){
             throw "Error stuff";
         }
 
-        console.log(data);
+        return data;
     }
     catch(err){
         console.log(err);

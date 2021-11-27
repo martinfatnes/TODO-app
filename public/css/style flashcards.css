@@ -86,8 +86,8 @@ header{background-color: #fff;}
 }
 
 .listcard{
+  height: auto;
   width: 370px;
-  height: 200px;
   word-wrap: break-word;
   margin: 10px; 
   background:#fff;

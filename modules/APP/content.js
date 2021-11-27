@@ -39,10 +39,25 @@ router.delete('/api/delete/category', protect, async (req, res, next) => {
     }
 })
 
+router.delete('/api/delete/content', protect, async (req, res, next) => {
+    const updata = req.body;
+    const username = res.locals.username;
+    
+    try{    
+        const data = await db.deleteItem(username, updata.id);
+
+        if(data.rows.length > 0){
+            res.status(200).json({msg: "deltet content"}).end();
+        }
+    }
+    catch(err){
+        next(err);
+    }
+})
+
 router.post('/api/content', protect, async (req, res, next) => {
     const updata = req.body;
     const username = res.locals.username;
-    console.log(updata);
 
     try{
         const categoryid = await db.getCategory(updata.header, username);
@@ -53,6 +68,25 @@ router.post('/api/content', protect, async (req, res, next) => {
         }
         else{
             throw "Could not create category";
+        }
+    }
+    catch(err){
+        next(err);
+    }
+})
+
+router.post('/api/unlistedContent', protect, async (req, res, next) => {
+    const updata = req.body;
+    const username = res.locals.username;
+
+    try{
+        const data = await db.createToDoItem(updata.content, username, null, updata.shareStatus);
+
+        if(data.rows.length > 0){
+            res.status(200).json({msg: "unlisted items"});
+        }
+        else{
+            throw "could nt add"
         }
     }
     catch(err){
