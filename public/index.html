@@ -9,12 +9,6 @@
     <body>
         <header>
             <nav>
-                
-            </nav>
-        </header>
-
-        <aside>
-            <nav>
                 <div class="sideMenu" id="login">
                     <button onclick="LoadLoginPage()">Login</button>
                     <button onclick="LoadCreateUser()">Signup</button>
@@ -24,14 +18,14 @@
                     <button id="home" onclick="LoadHomepage()">Homepage</button>
                     <button id="dash" onclick="callapsItems()">Dashboard</button>
                     <div id="dashboardMenu">
-                        <button>Create category</button>
-                        <button>Create content</button>
-                        <button onclick="LoadDashboard()">Edit account</button>
+                        <button onclick="LoadCategory()">My categories</button>
+                        <button>My Todos</button>
+                        <button onclick="LoadDashboard()">My account</button>
                     </div>
                     <button id="logOut" onclick="LogOut()">Logout</button>
                 </div>
             </nav>
-        </aside>
+        </header>
 
         <main id="content">
             
@@ -44,6 +38,8 @@
         <script src="scripts/ToDoList/getlists.js"></script>
         <script src="scripts/ToDoList/homepage.js"></script>
         <script src="scripts/settings.js"></script>
+        <script src="scripts/TodoList/createCategory.js"></script>
         <script src="scripts/loadContent.js"></script>
+        
     </body>
 </html>

@@ -4,7 +4,7 @@ async function createCategory(categoryName, public){
 
     const updata = {
         header: categoryName,
-        shareStatus: public 
+        shareStatus: public
     }
 
     const cfg = {
@@ -64,8 +64,6 @@ async function deleteCategory(categoryName){
         console.log(err);
     }
 }
-
-deleteCategory("Test");
 
 async function createContent(categoryName, content, public){
     const url = "/api/content";

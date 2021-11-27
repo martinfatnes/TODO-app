@@ -13,9 +13,15 @@ dbMethods.createToDoItem = function(content, username, categoryid, share){
     return pool.query(sql, values);
 }
 
-dbMethods.getContentOfCategory = function(userid){
-    const sql = "SELECT * FROM content WHERE userid = $1";
-    const values = [userid];
+dbMethods.getContentOfCategory = function(username){
+    const sql = "SELECT * FROM content WHERE username = $1";
+    const values = [username];
+    return pool.query(sql, values);
+}
+
+dbMethods.getPublicContent = function(categoryid){
+    const sql = "SELECT * FROM content WHERE categoryid = $1 AND share = true";
+    const values = [categoryid];
     return pool.query(sql, values);
 }
 
@@ -26,7 +32,7 @@ dbMethods.updateToDoItem = function(){
 ///------------------CAtegory
 
 dbMethods.getAllCategoriesUser = function(userid){
-    const sql = "SELECT * FROM category WHERE userid = $1";
+    const sql = "SELECT * FROM category WHERE username = $1";
     const values = [userid];
     return pool.query(sql, values);
 }
@@ -58,6 +64,11 @@ dbMethods.deleteCategory = function(name, username){
     const sql = 'DELETE FROM category WHERE name = $1 AND username = $2 RETURNING *';
     const values = [name, username];
     return pool.query(sql, values);
+}
+
+dbMethods.getPublicCategory = function(){
+    const sql = 'SELECT * FROM category WHERE share = true';
+    return pool.query(sql);
 }
 
 //USERS---------------------------------------------------

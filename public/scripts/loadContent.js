@@ -28,6 +28,10 @@ async function refreshContent(url, page){
     }
 }
 
+async function LoadCategory(){
+    refreshContent(CRATE_CATEGORY, categoryPage);
+}
+
 async function LoadLoginPage(){
     refreshContent(LOGIN, loginPage);
 }
@@ -41,8 +45,14 @@ async function LoadCreateUser(){
 }
 
 async function LoadHomepage(){
-    refreshContent(HOMEPAGE, homePage);
+    refreshContent(PUBLIC, getCategoryPublic);
 }
+
+/*
+async function LoadPublic(){
+    refreshContent(PUBLIC, getCategoryPublic);
+}
+*/
 
 function LogOut(){
     localStorage.removeItem("token");
