@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" type="image/png" href="flashcard.png" />
+  <link rel="stylesheet" href="/public/css/style flashcards.css">
+  <title>Todo app</title>
+</head>
+<body>
+
+  <main>
+    
+    <header>
+      <div class="container">
+        <div id="header">
+          <h1>Todo app</h1>
+          <div>
+            <button id="show_card_box">Add list</button>
+            <button id="delete_cards">Delete list</button>
+          </div>
+        </div>
+      </div>
+    </header>
+    
+    <section>
+      <div class="container">
+        <div id="create_card">
+          <h2>Create Todo list</h2>
+          <div id="pending-list">
+          </div>
+          <textarea id="answer"></textarea>
+          <div>
+            <button id="save_card">Save</button> <button id="close_card_box">Close</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div id="listcards"></div>
+      </div>
+    </section>
+
+  </main>
+  
+  <script src="/public/scripts/ToDoList/script flashcards.js"></script>
+</body>
+</html>
