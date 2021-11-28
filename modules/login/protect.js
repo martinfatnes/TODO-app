@@ -9,7 +9,7 @@ function protect(req, res, next){
     }
 
     const payload = utils.verifyToken(token);
-
+    
     if(!payload){
         res.status(403).json({error: "Not a valid token"}).end();
         return;

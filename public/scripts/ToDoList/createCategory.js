@@ -1,6 +1,3 @@
-
-
-
 const categoryPage = () => {
     const view = document.getElementById('categoryView');
     const savebtn = document.getElementById('save');

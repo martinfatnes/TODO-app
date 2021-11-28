@@ -56,8 +56,6 @@ main{
 .homepage{
     display: grid;
     grid-template-columns: auto;
-    background-color:darkseagreen;
-    border: solid green 1px;
     padding: 100px;
 }
 
@@ -107,13 +105,38 @@ header>div{
 .accountPage{
     display: grid;
     grid-template-columns: auto;
-    background-color:darkseagreen;
-    border: solid green 1px;
     padding: 100px;
 }
 
+.inputChange{
+    padding: 10px;
+    margin: 5px;
+}
+
+.dashBoardBtn{
+    margin: 5px;
+    padding: 10px;
+    background-color: rgb(39, 39, 39);
+    color: whitesmoke;
+}
+
+.dashBoardBtn:hover{
+    background-color: rgb(105, 105, 105);
+}
+
+.delteUserBtn{
+    margin: 5px;
+    padding: 10px;
+    background-color: rgb(39, 39, 39);
+    color: whitesmoke;
+}
+
+.delteUserBtn:hover{
+    background-color: rgb(145, 0, 0);
+}
+
 #formBtn:hover{
-    background-color: rgb(84, 134, 84);
+    background-color: rgb(168, 168, 168);
     cursor: pointer;
 }
   
@@ -126,15 +149,23 @@ header>div{
 }
 
 .publicList>div{
+    display: grid;
+    grid-template-columns: auto auto;
     margin: 10px;
     text-align: center;
     border: solid black 1px;
     padding: 5px;
     cursor: pointer;
-
-    background-color: burlywood;
 }
 
 .publicList>div:hover{
     background-color: cadetblue;
+}
+
+.header{
+    text-align: center;
+}
+
+.navBar{
+    position: fixed;
 }

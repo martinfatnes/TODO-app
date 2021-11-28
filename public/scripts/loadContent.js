@@ -44,15 +44,13 @@ async function LoadCreateUser(){
     refreshContent(SIGNUP, createUserPage);
 }
 
-async function LoadHomepage(){
-    refreshContent(PUBLIC, getCategoryPublic);
+async function flash(){
+    refreshContent(FLASH, toDoClientAdd);
 }
 
-/*
 async function LoadPublic(){
-    refreshContent(PUBLIC, getCategoryPublic);
+    refreshContent(PUBLIC, publicLists);
 }
-*/
 
 function LogOut(){
     localStorage.removeItem("token");
@@ -70,7 +68,7 @@ function callapsItems(){
 
 window.onload = function(){
     if(localStorage.getItem("token")){
-        LoadHomepage();
+        flash();
     }
     else{
         LoadLoginPage();

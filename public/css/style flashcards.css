@@ -86,8 +86,10 @@ header{background-color: #fff;}
 }
 
 .listcard{
+  display: grid;
+  justify-content: center;
+  height: auto;
   width: 370px;
-  height: 200px;
   word-wrap: break-word;
   margin: 10px; 
   background:#fff;
@@ -95,7 +97,13 @@ header{background-color: #fff;}
   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.9);
 }
 
-.listcard h2{font-size: 1rem;}
+.listcard h2{font-size: 1.5rem; text-align: center;}
+
+.contentDiv{
+  display: grid;
+  grid-template-columns: 200px auto;
+  padding: 5px;
+}
 
 #answer{
     padding: 15px;
