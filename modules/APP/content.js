@@ -199,8 +199,7 @@ router.put('/api/updateContent', async (req, res, next) => {
 router.put('/api/update/complteded', async (req, res, next) => {
     const updata = req.body;
     try{
-        const data = await db.updateCompletedItems(updata.id);
-
+        const data = await db.updateCompletedItems(updata.id, updata.status);
         if(data.rows.length > 0){
             res.status(200).json(data.rows);
         }

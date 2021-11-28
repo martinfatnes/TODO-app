@@ -80,7 +80,6 @@ async function refresh(){
       const content = [];
       for(let value of category){
         const data = await getContent(value.id);
-        
         if(data){
           content.push(data);
         }
@@ -95,24 +94,30 @@ async function refresh(){
         listcards.appendChild(div);
         for(let value of content[i]){
           const divContent = document.createElement('div');
+          divContent.className = "contentDiv";
           const p = document.createElement('p');
           const checkbox = document.createElement('input');
           checkbox.type = "checkbox";
 
           checkbox.addEventListener('change', function(){
-            updateCompletedItems(value.id);
+            updateCompletedItems(value.id, value.done);
           })
 
           if(value.share){
-            p.innerHTML = value.content + " " + "Public";
+            p.innerHTML = value.content;
           }
           else{
-            p.innerHTML = value.content + " " + "Private";
+            p.innerHTML = value.content;
           }
           divContent.appendChild(p);
           if(value.done){
             const completed = document.createElement('p');
-            completed.innerHTML = "Completed";
+            completed.innerHTML = '✔';
+
+            completed.addEventListener('click', function(){
+              updateCompletedItems(value.id, value.done);
+            })
+
             divContent.appendChild(completed);
           }
           else{
@@ -120,49 +125,44 @@ async function refresh(){
           }
           div.appendChild(divContent);
 
-          divContent.addEventListener('click', function(){
-            const edit = document.createElement("input");
-            const delteBtn = document.createElement('button');
-            delteBtn.innerHTML = "Delte item";
-            divContent.appendChild(edit);
-            divContent.appendChild(delteBtn);
+          const edit = document.createElement("input");
+          const delteBtn = document.createElement('button');
+          delteBtn.innerHTML = "Delte item";
+          delteBtn.style.display = "none";
+          edit.style.display = "none";
+          divContent.appendChild(edit);
+          divContent.appendChild(delteBtn);
 
-            delteBtn.addEventListener('click', function(){
-              deleteContent(value.id);
-            });
+          p.addEventListener('click', function(){
 
-            edit.addEventListener('keydown', function(event){
-              const key = event.keyCode;
-              if(key === 13){
-                updateContent(edit.value, value.id);
-              }
-            })
+            if(delteBtn.style.display === "none"){
+              delteBtn.style.display = "block";
+            }
+            else{
+              delteBtn.style.display = "none";
+            }
+            
+            if(edit.style.display === "none"){
+              edit.style.display = "block";
+            }
+            else{
+              edit.style.display = "none";
+            }
+          })
 
+          delteBtn.addEventListener('click', function(){
+            deleteContent(value.id);
+          });
+
+          edit.addEventListener('keydown', function(event){
+            const key = event.keyCode;
+            if(key === 13){
+              updateContent(edit.value, value.id);
+            }
           })
         }
       }
     }
-  catch(err){
-    console.log(err);
-  }
-}
-
-async function displayCategory(){
-  const categoryDiv = document.getElementById('category');
-  const select = document.getElementById('selectCategory');
-  
-  try{
-    const category = await getCategory();
-
-    for(let value of category){
-      const options = document.createElement('option');
-      options.value = value.name;
-      options.innerHTML = value.name;
-      select.appendChild(options)
-      categoryDiv.appendChild(select);
-    }
-    
-  }
   catch(err){
     console.log(err);
   }

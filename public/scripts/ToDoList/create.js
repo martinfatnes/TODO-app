@@ -163,11 +163,12 @@ async function updateContent(content, id){
     }
 }
 
-async function updateCompletedItems(id){
+async function updateCompletedItems(id, status){
     const url = "/api/update/complteded";
 
     const updata = {
-        id: id
+        id: id,
+        status: status
     }
 
     const cfg = {

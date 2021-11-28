@@ -42,7 +42,7 @@ async function getContent(categoryId){
         const data = await respons.json();
 
         if(respons.status != 200){
-            throw "You have not content";
+            throw "Category have no related content";
         }
 
         return data;

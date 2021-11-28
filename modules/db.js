@@ -31,7 +31,12 @@ dbMethods.updateToDoItem = function(content, id){
     return pool.query(sql, values);
 }
 
-dbMethods.updateCompletedItems = function(id){
+dbMethods.updateCompletedItems = function(id, status){
+    if(status){
+        const sql = "UPDATE content SET done = false WHERE id = $1 RETURNING *";
+        const values = [id];
+        return pool.query(sql, values);
+    }
     const sql = "UPDATE content SET done = true WHERE id = $1 RETURNING *";
     const values = [id];
     return pool.query(sql, values);
