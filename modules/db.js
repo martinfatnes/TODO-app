@@ -20,7 +20,7 @@ dbMethods.getContentOfCategory = function(username, categoryId){
 }
 
 dbMethods.getPublicContent = function(categoryid){
-    const sql = "SELECT * FROM content WHERE categoryid = $1 AND share = true";
+    const sql = "SELECT * FROM content WHERE categoryid = $1";
     const values = [categoryid];
     return pool.query(sql, values);
 }

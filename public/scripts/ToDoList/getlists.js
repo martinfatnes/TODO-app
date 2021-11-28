@@ -53,7 +53,6 @@ async function getContent(categoryId){
 }
 
 async function getCategoryPublic(){
-    const container = document.getElementById('public');
     const url = "/api/category/public/";
     const token = localStorage.getItem('token');
 
@@ -73,27 +72,7 @@ async function getCategoryPublic(){
             throw "No public category";
         }  
 
-        for(let value of data){
-            const header = document.createElement('h2');
-            const publisher = document.createElement('p');
-            const div = document.createElement('div');
-            const contentDiv = document.createElement('div');
-            container.className = "publicList";
-
-            header.innerHTML = value.name;
-            publisher.innerHTML = `Published by: ${value.username}`;
-
-            div.appendChild(header);
-            div.appendChild(publisher);
-            div.appendChild(contentDiv);
-
-            div.addEventListener('click', function(){
-                contentDiv.innerHTML = "";
-                getContentUnderCategory(value.id, contentDiv);
-            })
-            
-            container.appendChild(div);
-        }
+        return data;
     }
     catch(err){
         console.log(err);
@@ -117,7 +96,7 @@ async function getContentUnderCategory(categoryId){
         if(respons.status != 200){
             return data.msg; 
         }
-
+        
         return data;
     }
     catch(err){

@@ -126,10 +126,9 @@ router.get('/api/category/public', protect, async (req, res, next) => {
 
 router.get('/api/content/public/:id', async (req, res, next) => {
     const categoryid = req.params.id;
-
     try{
         const data = await db.getPublicContent(categoryid);
-        
+    
         if(data.rows.length > 0){
             res.status(200).json(data.rows);
         }

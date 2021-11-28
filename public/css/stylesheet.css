@@ -125,16 +125,15 @@ header>div{
 }
 
 .publicList>div{
+    display: grid;
+    grid-template-columns: auto auto;
     margin: 10px;
     text-align: center;
     border: solid black 1px;
     padding: 5px;
     cursor: pointer;
-
-    background-color: burlywood;
 }
 
 .publicList>div:hover{
     background-color: cadetblue;
 }
-

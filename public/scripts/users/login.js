@@ -25,7 +25,7 @@ function loginPage(){
             localStorage.setItem('token', data.token);
             statusMsg.innerHTML = data.msg;
             isActive = true;
-            LoadHomepage();
+            LoadPublic();
         }
         catch(error){
             console.log(error);
