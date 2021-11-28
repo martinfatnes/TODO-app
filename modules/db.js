@@ -81,6 +81,13 @@ dbMethods.deleteCategory = function(id, username){
     return pool.query(sql, values);
 }
 
+// Delete category with its content
+dbMethods.deleteCategoryContent = function(id){
+    const sql = "DELETE FROM content WHERE categoryid = $1"
+    const values = [id];
+    return pool.query(sql, values);
+}
+
 dbMethods.getPublicCategory = function(){
     const sql = 'SELECT * FROM category WHERE share = true';
     return pool.query(sql);
