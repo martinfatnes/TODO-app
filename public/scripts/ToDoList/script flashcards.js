@@ -1,117 +1,147 @@
 let currentCategory;
-let allContent;
-
-async function toDoClient(){
-  let contentArray = localStorage.getItem('items') ? JSON.parse(localStorage.getItem('items')) : [];
+function toDoClientAdd(){
+  const addList = document.getElementById("save_card");
+  const showCard = document.getElementById('show_card_box');
+  const closeCardEditor = document.getElementById('close_card_box');
+  const textEditor = document.getElementById('create_card');
+  const text = document.getElementById('answer');
   const items = document.getElementById('items');
+  const dropDown = document.getElementById('selectCategory');
+  const checkPublic = document.getElementById('checkPublc');
 
-  document.getElementById("save_card").addEventListener("click", () => {
-    addlistcard();
+  async function categorySelector(){
+    
+    try{
+      const data = await getCategory();
 
-    if(currentCategory != null){
-      createContent(currentCategory, JSON.stringify(contentArray), true);
-    }
-    else{
-      createUnlisted(null ,JSON.stringify(contentArray), true);
-    }
-    contentArray = [];
-  });
-
-  document.getElementById("delete_cards").addEventListener("click", () => {
-    localStorage.removeItem("items");
-    listcards.innerHTML = '';
-    contentArray = [];
-  });
-  
-  document.getElementById("show_card_box").addEventListener("click", () => {
-    document.getElementById("create_card").style.display = "block";
-  });
-  
-  document.getElementById("close_card_box").addEventListener("click", () => {
-    document.getElementById("create_card").style.display = "none";
-  });
-  
-  listcardMaker = async (text) => {
-    const listcard = document.createElement("div");
-
-    listcard.className = 'listcard'; 
-    for(let i = 0; i < text.length; i++){
-      const answer = document.createElement('h2');
-      const checkBox = document.createElement("button");
-      checkBox.setAttribute("id", "checkbox"); 
-      answer.innerHTML = text[i].my_answer;
-      listcard.appendChild(answer);
-      listcard.appendChild(checkBox); 
-    }
-
-    listcard.addEventListener("click", () => {
-      if(answer.style.display == "none")
-        answer.style.display = "block";
-      else
-        answer.style.display = "none";
-    })
-  
-    document.querySelector("#listcards").appendChild(listcard);
-  }
-  
-  contentArray.forEach(listcardMaker);
-  
-  addlistcard = () => {
-    listcardMaker(contentArray);
-    answer.value = "";
-    items.innerHTML = "";
-  }
-
-  const test = document.getElementById('answer');
-
-  test.addEventListener('keydown', function(event){
-    const key = event.keyCode;
-    if(key === 13){
-      let listcard_info = {
-        'my_answer'  : answer.value
+      for(let value of data){
+        const option = document.createElement('option');
+        option.value = value.id;
+        option.innerHTML = value.name;
+        dropDown.appendChild(option);
       }
-      contentArray.push(listcard_info);
-      const li = document.createElement('li');
-      li.innerHTML = answer.value;
-      items.appendChild(li);
-      answer.value = "";
+      check();
+    }
+    catch(err){
+      console.log(err);
+    }
+  }
+
+  text.addEventListener('keydown', async function(event){
+    const key = event.keyCode;
+
+    if(key === 13){
+      try{
+        if(checkPublic.checked){
+          const data = await createContent(currentCategory, text.value, true);
+          items.innerHTML = "";
+          outPutToDb = "";
+          text.value = "";
+          console.log("true");
+          if(data != 200){
+            throw data;
+          }
+
+        }
+        else{
+          const data = await createContent(currentCategory, text.value, false);
+          items.innerHTML = "";
+          outPutToDb = "";
+          text.value = "";
+          if(data != 200){
+            throw data;
+          }
+        }
+    }
+    catch(err){
+      console.log(err);
+    }
     }
   })
 
-  displayCategory();
-  displayContent();
+  showCard.addEventListener('click', function(){
+    textEditor.style.display = "block";
+  })
+
+  closeCardEditor.addEventListener('click', function(){
+    textEditor.style.display = "none";
+  })
+
+  categorySelector();
+  refresh();
 }
 
-async function displayContent(){
-  const card = document.getElementById("listcards");
-  card.className = 'listcard';
+async function refresh(){
+  const listcards = document.getElementById('listcards');
+  listcards.innerHTML = "";
+
   try{
-    const data = await getContent();
-    for(let value of data){
-      const div = document.createElement('div');
-      const h2 = document.createElement('h2');
-      const btn = document.createElement('button');
-      btn.innerHTML = "Delete content";
-      h2.innerHTML = value.content;
-      div.appendChild(h2);
-      div.appendChild(btn);
-      card.appendChild(div);
-
-      div.addEventListener('click', function(){
-        if(btn.style.display = "block"){
-          btn.style.display = "none";
+      const category = await getCategory();
+      const content = [];
+      for(let value of category){
+        const data = await getContent(value.id);
+        
+        if(data){
+          content.push(data);
         }
-        else{
-          btn.style.display = "block";
-        }
-      })
+      }
 
-      btn.addEventListener('click', function(){
-        console.log(value.id);
-        deleteContent(value.id);
-      })
+      for(let i = 0; i < content.length; i++){
+        const div = document.createElement('div');
+        div.className = "listcard";
+        const h2 = document.createElement('h2');
+        h2.innerHTML = category[i].name;
+        div.appendChild(h2);
+        listcards.appendChild(div);
+        for(let value of content[i]){
+          const divContent = document.createElement('div');
+          const p = document.createElement('p');
+          const checkbox = document.createElement('input');
+          checkbox.type = "checkbox";
+
+          checkbox.addEventListener('change', function(){
+            updateCompletedItems(value.id);
+          })
+
+          if(value.share){
+            p.innerHTML = value.content + " " + "Public";
+          }
+          else{
+            p.innerHTML = value.content + " " + "Private";
+          }
+          divContent.appendChild(p);
+          if(value.done){
+            const completed = document.createElement('p');
+            completed.innerHTML = "Completed";
+            divContent.appendChild(completed);
+          }
+          else{
+            divContent.appendChild(checkbox);
+          }
+          div.appendChild(divContent);
+
+          divContent.addEventListener('click', function(){
+            const edit = document.createElement("input");
+            const delteBtn = document.createElement('button');
+            delteBtn.innerHTML = "Delte item";
+            divContent.appendChild(edit);
+            divContent.appendChild(delteBtn);
+
+            delteBtn.addEventListener('click', function(){
+              deleteContent(value.id);
+            });
+
+            edit.addEventListener('keydown', function(event){
+              const key = event.keyCode;
+              if(key === 13){
+                updateContent(edit.value, value.id);
+              }
+            })
+
+          })
+        }
+      }
     }
-  }
   catch(err){
     console.log(err);
   }
@@ -140,5 +170,7 @@ async function displayCategory(){
 
 function check(){
   const select = document.getElementById('selectCategory');
-  currentCategory = select.value;
+  const value = parseInt(select.value);
+  currentCategory = value;
 }
+

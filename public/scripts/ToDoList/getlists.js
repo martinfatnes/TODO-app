@@ -25,8 +25,8 @@ async function getCategory(){
     }
 }
 
-async function getContent(){
-    const url = "/api/content/all";
+async function getContent(categoryId){
+    const url = "/api/content/all/" + categoryId;
     const token = localStorage.getItem('token');
 
     const cfg = {
@@ -100,7 +100,7 @@ async function getCategoryPublic(){
     }
 }
 
-async function getContentUnderCategory(categoryId, div){
+async function getContentUnderCategory(categoryId){
     const url = "/api/content/public/" + categoryId;
 
     const cfg = {
@@ -115,22 +115,10 @@ async function getContentUnderCategory(categoryId, div){
         const data = await respons.json();
 
         if(respons.status != 200){
-            return console.log(data.msg); 
+            return data.msg; 
         }
 
-        for(let value of data){
-            const p = document.createElement('p');
-            const contentDiv = document.createElement('div');
-            const checkBox = document.createElement('input');
-
-            contentDiv.style.display = "grid";
-            contentDiv.style.gridTemplateColumns = "auto auto";
-            checkBox.type = "checkbox";
-            p.innerHTML = value.content;
-            contentDiv.appendChild(p);
-            contentDiv.appendChild(checkBox);
-            div.appendChild(contentDiv);
-        }
+        return data;
     }
     catch(err){
         console.log(err);

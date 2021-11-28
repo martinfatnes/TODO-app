@@ -46,8 +46,8 @@ router.delete('/api/delete/content', protect, async (req, res, next) => {
     try{    
         const data = await db.deleteItem(username, updata.id);
 
-        if(data.rows.length > 0){
-            res.status(200).json({msg: "deltet content"}).end();
+        if(data.rowCount > 0){
+            res.status(200).json({msg: "Content deleted"}).end();
         }
     }
     catch(err){
@@ -78,7 +78,6 @@ router.post('/api/content', protect, async (req, res, next) => {
 router.post('/api/unlistedContent', protect, async (req, res, next) => {
     const updata = req.body;
     const username = res.locals.username;
-
     try{
         const data = await db.createToDoItem(updata.content, username, null, updata.shareStatus);
 
@@ -96,7 +95,6 @@ router.post('/api/unlistedContent', protect, async (req, res, next) => {
 
 router.get('/api/category/all', protect, async (req, res, next) => {
     const username = res.locals.username;
-    
     try{
         const data = await db.getAllCategoriesUser(username);
         
@@ -145,11 +143,12 @@ router.get('/api/content/public/:id', async (req, res, next) => {
 })
 
 
-router.get('/api/content/all', protect, async (req, res, next) => {
+router.get('/api/content/all/:id', protect, async (req, res, next) => {
     const username = res.locals.username;
+    const categoryId = req.params.id;
 
     try{
-        const data = await db.getContentOfCategory(username);
+        const data = await db.getContentOfCategory(username, categoryId);
 
         if(data.rows.length > 0){
             res.status(200).json(data.rows);
@@ -163,5 +162,55 @@ router.get('/api/content/all', protect, async (req, res, next) => {
     }
 })
 
+router.get('/api/content/category', protect, async (req, res, next) => {
+    const username = res.locals.username;
+    const categoryId = req.body;
+
+    try{
+        const data = await getContentOfCategory(username, categoryId);
+
+        if(data.rows.length > 0){
+            res.status(200).json(data.rows).end();
+        }
+    }
+    catch(err){
+        next(err);
+    }
+})
+
+router.put('/api/updateContent', async (req, res, next) => {
+    const updata = req.body;
+    console.log(updata);
+    try{
+        const data = await db.updateToDoItem(updata.content, updata.id);
+
+        if(data.rows.length > 0){
+            res.status(200).json(data.rows);
+        }
+        else{
+            res.status(404).json({msg: "no content here"});
+        }
+    }
+    catch(err){
+        next(err);
+    }
+})
+
+router.put('/api/update/complteded', async (req, res, next) => {
+    const updata = req.body;
+    try{
+        const data = await db.updateCompletedItems(updata.id);
+
+        if(data.rows.length > 0){
+            res.status(200).json(data.rows);
+        }
+        else{
+            res.status(404).json({msg: "no content here"});
+        }
+    }
+    catch(err){
+        next(err);
+    }
+})
 
 module.exports = router; 

@@ -8,21 +8,14 @@ const pool = new pg.Pool({
 const dbMethods = {};
 
 dbMethods.createToDoItem = function(content, username, categoryid, share){
-    console.log(categoryid);
-    if(categoryid){
-        const sql = "INSERT INTO content (id, content, username, categoryid, share) VALUES(DEFAULT, $1, $2, $3, $4) RETURNING *";
-        const values = [content, username, categoryid, share];
-        return pool.query(sql, values);   
-    }
-    
     const sql = "INSERT INTO content (id, content, username, categoryid, share) VALUES(DEFAULT, $1, $2, $3, $4) RETURNING *";
-    const values = [content, username, null, share];
+    const values = [content, username, categoryid, share];
     return pool.query(sql, values);
 }
 
-dbMethods.getContentOfCategory = function(username){
-    const sql = "SELECT * FROM content WHERE username = $1";
-    const values = [username];
+dbMethods.getContentOfCategory = function(username, categoryId){
+    const sql = "SELECT * FROM content WHERE username = $1 AND categoryid = $2";
+    const values = [username, categoryId];
     return pool.query(sql, values);
 }
 
@@ -32,8 +25,16 @@ dbMethods.getPublicContent = function(categoryid){
     return pool.query(sql, values);
 }
 
-dbMethods.updateToDoItem = function(){
+dbMethods.updateToDoItem = function(content, id){
+    const sql = "UPDATE content SET content = $1 WHERE id = $2 RETURNING *";
+    const values = [content, id];
+    return pool.query(sql, values);
+}
 
+dbMethods.updateCompletedItems = function(id){
+    const sql = "UPDATE content SET done = true WHERE id = $1 RETURNING *";
+    const values = [id];
+    return pool.query(sql, values);
 }
 
 ///------------------CAtegory
@@ -63,9 +64,9 @@ dbMethods.createCategory = function(name, username, share){
     return pool.query(sql, values);
 }
 
-dbMethods.getCategory = function(name, username){
-    const sql = "SELECT * FROM category WHERE name = $1 AND username = $2";
-    const values = [name, username];
+dbMethods.getCategory = function(id, username){
+    const sql = "SELECT * FROM category WHERE id = $1 AND username = $2";
+    const values = [id, username];
     return pool.query(sql, values);
 }
 

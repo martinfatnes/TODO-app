@@ -48,9 +48,11 @@ async function LoadHomepage(){
     refreshContent(PUBLIC, getCategoryPublic);
 }
 
+
 async function flash(){
-    refreshContent(FLASH, toDoClient);
+    refreshContent(FLASH, toDoClientAdd);
 }
+
 
 /*
 async function LoadPublic(){
@@ -74,7 +76,7 @@ function callapsItems(){
 
 window.onload = function(){
     if(localStorage.getItem("token")){
-        LoadHomepage();
+        flash();
     }
     else{
         LoadLoginPage();
