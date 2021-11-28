@@ -23,6 +23,4 @@ const categoryPage = () => {
             view.innerHTML = `<p style="color:red">${error}</p> ` 
         }
     })    
-
 }
-
