@@ -32,21 +32,16 @@ async function createCategory(categoryName, public){
     }
 }
 
-async function deleteCategory(categoryName){
-    const url = "/api/delete/category";
+async function deleteCategory(id){
+    const url = `/api/category/${id}`;
     const token = localStorage.getItem('token');
-
-    const updata = {
-        name: categoryName
-    }
 
     const cfg = {
         method: "DELETE",
         headers: {
             "content-type":"application/json",
             "autorization": token
-        },
-        body: JSON.stringify(updata)
+        }
     }
 
     try{
@@ -54,7 +49,7 @@ async function deleteCategory(categoryName){
         const data = await respons.json();
 
         if(respons.status != 200){
-            throw "Coult not create";
+            throw "Coult not delete";
         }
         else{
             console.log(data);
