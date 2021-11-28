@@ -75,9 +75,9 @@ dbMethods.getCategory = function(id, username){
     return pool.query(sql, values);
 }
 
-dbMethods.deleteCategory = function(name, username){
-    const sql = 'DELETE FROM category WHERE name = $1 AND username = $2 RETURNING *';
-    const values = [name, username];
+dbMethods.deleteCategory = function(id, username){
+    const sql = 'DELETE FROM category WHERE id = $1 AND username = $2 RETURNING *';
+    const values = [id, username];
     return pool.query(sql, values);
 }
 
