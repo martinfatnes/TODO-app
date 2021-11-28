@@ -86,6 +86,12 @@ dbMethods.getPublicCategory = function(){
     return pool.query(sql);
 }
 
+dbMethods.getContentForUser = function(username){
+    const sql = 'SELECT * FROM content WHERE username = $1';
+    const values = [username];
+    return pool.query(sql, values);
+}
+
 //USERS---------------------------------------------------
 
 dbMethods.createUser = function(username, password, salt){

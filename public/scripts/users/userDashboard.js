@@ -72,10 +72,11 @@ async function dashBoard(){
 
     try{
 
-        const postsInfo = await getContent();
+        const postsInfo = await getContentUser();
         const category = await getCategory();
-        posts.innerHTML = ` Posted to do items: ${postsInfo.length}<br>
-                            Posted Categories: ${category.length}
+        posts.innerHTML = ` Posted Lists: ${category.length}<br>
+        Posted to do items: ${postsInfo.length}
+                            
         `;
         dispayUsername.innerHTML = `Username: ${postsInfo[0].username}`;
     }

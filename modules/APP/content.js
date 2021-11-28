@@ -141,6 +141,21 @@ router.get('/api/content/public/:id', async (req, res, next) => {
     }
 })
 
+router.get('/api/content/user', protect, async (req, res, next) => {
+    const username = res.locals.username;
+
+    try{
+        const data = await db.getContentForUser(username);
+        
+        if(data.rows.length > 0){
+            res.status(200).json(data.rows);
+        }
+    }
+    catch(err){
+        next(err);
+    }
+})
+
 
 router.get('/api/content/all/:id', protect, async (req, res, next) => {
     const username = res.locals.username;

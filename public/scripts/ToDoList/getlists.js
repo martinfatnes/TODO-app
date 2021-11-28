@@ -104,6 +104,33 @@ async function getContentUnderCategory(categoryId){
     }
 }
 
+async function getContentUser(){
+    const url = "/api/content/user";
+    const token = localStorage.getItem('token');
+    
+    const cfg = {
+        method: "GET",
+        headers: {
+            "content-type":"application/json",
+            "autorization": token
+        }
+    }
+
+    try{
+        const respons = await fetch(url, cfg);
+        const data = await respons.json();
+
+        if(respons.status != 200){
+            throw "You have not posted yet";
+        }
+
+        return data;
+    }
+    catch(err){
+        console.log(err);
+    }
+}
+
 
 //GET LOCAL CATEGORY
 async function getPublicCategory(){
