@@ -39,6 +39,6 @@ const categoryPage = () => {
     const view = document.getElementById('categoryView');
 
     deleteCategory(categoryId)
-    .then(res =>  view.innerHTML = `<p style="color:green">Categorien er slette <hr/><button onclick="LoadCategory()">Tilbake</button></p>`)
+    .then(res =>  LoadCategory())
     .catch(error => view.innerHTML= `<p style="color:red">${error} <hr/><button onclick="LoadCategory()">Tilbake</button></p>`)
 }
