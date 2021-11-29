@@ -38,15 +38,6 @@ router.delete('/api/category/:id', protect, async (req, res, next) => {
     catch(err){
         console.log(err);
     }
-
-    /*
-     //  Sletter også innhold om kategorien hadde noe
-     await deleteCategoryContent();
-
-     Vi har en sånn foreign key mellom kategori og content, så sletting av kategori
-     tar med seg alt innhold med samme kategori id(fk).
-
-     */
 })
 
 router.get('/api/category/all', protect, async (req, res, next) => {
