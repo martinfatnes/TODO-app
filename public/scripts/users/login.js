@@ -6,6 +6,8 @@ function loginPage(){
 
     btn.addEventListener('click', async function(){
         const url = '/api/user/login';
+
+        //Returns a base64 ASCII string based on username and password + basic (basic username:password)
         const credString = createCredentialString(username.value, password.value);
         
         const cfg = {
@@ -25,7 +27,7 @@ function loginPage(){
             localStorage.setItem('token', data.token);
             statusMsg.innerHTML = data.msg;
             isActive = true;
-            flash();
+            LoadCreateToDoItems(); //Loads homepage
         }
         catch(error){
             console.log(error);

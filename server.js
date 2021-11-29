@@ -1,6 +1,7 @@
 const express = require('express');
 const users = require("./modules/login/users");
-const lists = require('./modules/APP/content');
+const items = require('./modules/APP/content');
+const category = require('./modules/APP/category');
 const server = express();
 const PORT = process.env.PORT || 8080;
 
@@ -14,7 +15,8 @@ server.use((err, req, res, next) => {
     }).end();
 })
 server.use(users);
-server.use(lists);
+server.use(items);
+server.use(category);
 
 server.listen(server.get('PORT'), function(){
     console.log("server running", server.get("PORT"));

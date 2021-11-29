@@ -48,6 +48,7 @@ async function changePassword(password, securityPassword){
             const data = await result.json();
     
             if(result.status != 200){
+                statusMsg.innerHTML = data.err;
                 throw data.err;
             }
             statusMsg.innerHTML = data.msg;
@@ -70,6 +71,19 @@ async function dashBoard(){
     const dispayUsername = document.getElementById('username');
     const changePasswordBtn = document.getElementById("submit");
 
+    changePasswordBtn.addEventListener('click', function(){
+        changePassword(password.value, securityPassword.value);
+    })
+
+    formBtn.addEventListener('click', function(){
+        if(form.style.display === "none"){
+            form.style.display = "grid";
+        }
+        else{
+            form.style.display = "none";
+        }
+    })
+
     try{
 
         const postsInfo = await getContentUser();
@@ -83,17 +97,4 @@ async function dashBoard(){
     catch(err){
         console.log(err);
     }
-
-    changePasswordBtn.addEventListener('click', function(){
-        changePassword(password.value, securityPassword.value);
-    })
-
-    formBtn.addEventListener('click', function(){
-        if(form.style.display === "none"){
-            form.style.display = "grid";
-        }
-        else{
-            form.style.display = "none";
-        }
-    })
 }

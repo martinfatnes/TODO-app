@@ -117,7 +117,7 @@ router.put('/apu/user/update/password', protect, async (req, res, next) => {
             }
         }
         else{
-            res.status(400).json({err: "Cant change to same password"}).end();
+            res.status(400).json({err: "Cant use same password"}).end();
         }
     }
     catch(err){

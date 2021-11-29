@@ -10,11 +10,10 @@ function toDoClientAdd(){
   const checkPublic = document.getElementById('checkPublc');
 
   async function categorySelector(){
-    
     try{
-      const data = await getCategory();
+      const data = await getContentUnderCategoryUser();
 
-      for(let value of data){
+      for(let value of data[0]){
         const option = document.createElement('option');
         option.value = value.id;
         option.innerHTML = value.name;
@@ -76,91 +75,87 @@ async function refresh(){
   listcards.innerHTML = "";
 
   try{
-      const category = await getCategory();
-      const content = [];
-      for(let value of category){
-        const data = await getContent(value.id);
-        if(data){
-          content.push(data);
-        }
-      }
-
-      for(let i = 0; i < content.length; i++){
-        const div = document.createElement('div');
-        div.className = "listcard";
-        const h2 = document.createElement('h2');
-        h2.innerHTML = category[i].name;
-        div.appendChild(h2);
-        listcards.appendChild(div);
-        for(let value of content[i]){
-          const divContent = document.createElement('div');
-          divContent.className = "contentDiv";
-          const p = document.createElement('p');
-          const checkbox = document.createElement('input');
-          checkbox.type = "checkbox";
-
-          checkbox.addEventListener('change', function(){
-            updateCompletedItems(value.id, value.done);
-          })
-
-          if(value.share){
-            p.innerHTML = value.content;
-          }
-          else{
-            p.innerHTML = value.content;
-          }
-          divContent.appendChild(p);
-          if(value.done){
-            const completed = document.createElement('p');
-            completed.innerHTML = '✔';
-
-            completed.addEventListener('click', function(){
-              updateCompletedItems(value.id, value.done);
-            })
-
-            divContent.appendChild(completed);
-          }
-          else{
-            divContent.appendChild(checkbox);
-          }
-          div.appendChild(divContent);
-
-          const edit = document.createElement("input");
-          const delteBtn = document.createElement('button');
-          delteBtn.innerHTML = "Delte item";
-          delteBtn.style.display = "none";
-          edit.style.display = "none";
-          divContent.appendChild(edit);
-          divContent.appendChild(delteBtn);
-
-          p.addEventListener('click', function(){
-
-            if(delteBtn.style.display === "none"){
-              delteBtn.style.display = "block";
-            }
-            else{
+      const data = await getContentUnderCategoryUser();
+      if(!data.msg){
+        for(let value of data[0]){
+          const div = document.createElement('div');
+          div.className = "listcard";
+          const h2 = document.createElement('h2');
+          h2.innerHTML = value.name;
+          div.appendChild(h2);
+          listcards.appendChild(div);
+          for(let items of data[1]){
+            if(value.id === items.categoryid){
+              const divContent = document.createElement('div');
+              divContent.className = "contentDiv";
+              const p = document.createElement('p');
+              const checkbox = document.createElement('input');
+              checkbox.type = "checkbox";
+    
+              checkbox.addEventListener('change', function(){
+                updateCompletedItems(items.id, items.done);
+              })
+    
+              if(items.share){
+                p.innerHTML = items.content;
+              }
+              else{
+                p.innerHTML = items.content;
+              }
+              divContent.appendChild(p);
+              if(items.done){
+                const completed = document.createElement('p');
+                completed.innerHTML = '✔';
+    
+                completed.addEventListener('click', function(){
+                  updateCompletedItems(items.id, items.done);
+                })
+    
+                divContent.appendChild(completed);
+              }
+              else{
+                divContent.appendChild(checkbox);
+              }
+              div.appendChild(divContent);
+    
+              const edit = document.createElement("input");
+              const delteBtn = document.createElement('button');
+              delteBtn.innerHTML = "Delte item";
               delteBtn.style.display = "none";
-            }
-            
-            if(edit.style.display === "none"){
-              edit.style.display = "block";
-            }
-            else{
               edit.style.display = "none";
+              divContent.appendChild(edit);
+              divContent.appendChild(delteBtn);
+    
+              p.addEventListener('click', function(){
+    
+                if(delteBtn.style.display === "none"){
+                  delteBtn.style.display = "block";
+                }
+                else{
+                  delteBtn.style.display = "none";
+                }
+                
+                if(edit.style.display === "none"){
+                  edit.style.display = "block";
+                }
+                else{
+                  edit.style.display = "none";
+                }
+              })
+    
+              delteBtn.addEventListener('click', function(){
+                deleteContent(items.id);
+              });
+    
+              edit.addEventListener('keydown', function(event){
+                const key = event.keyCode;
+                if(key === 13){
+                  updateContent(edit.value, items.id);
+                }
+              })
             }
-          })
-
-          delteBtn.addEventListener('click', function(){
-            deleteContent(value.id);
-          });
-
-          edit.addEventListener('keydown', function(event){
-            const key = event.keyCode;
-            if(key === 13){
-              updateContent(edit.value, value.id);
-            }
-          })
-        }
+          }
+        } 
       }
     }
   catch(err){

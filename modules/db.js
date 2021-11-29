@@ -13,16 +13,9 @@ dbMethods.createToDoItem = function(content, username, categoryid, share){
     return pool.query(sql, values);
 }
 
-dbMethods.getContentOfCategory = function(username, categoryId){
-    const sql = "SELECT * FROM content WHERE username = $1 AND categoryid = $2";
-    const values = [username, categoryId];
-    return pool.query(sql, values);
-}
-
-dbMethods.getPublicContent = function(categoryid){
-    const sql = "SELECT * FROM content WHERE categoryid = $1";
-    const values = [categoryid];
-    return pool.query(sql, values);
+dbMethods.getContent = function(){
+    const sql = "SELECT * FROM content";
+    return pool.query(sql);
 }
 
 dbMethods.updateToDoItem = function(content, id){
@@ -42,20 +35,19 @@ dbMethods.updateCompletedItems = function(id, status){
     return pool.query(sql, values);
 }
 
+dbMethods.getAllContentUser = function(username){
+    const sql = "SELECT * FROM content WHERE username = $1";
+    const values = [username];
+    return pool.query(sql, values);
+} 
+
 ///------------------CAtegory
 
-dbMethods.getAllCategoriesUser = function(userid){
+dbMethods.getAllCategoriesUser = function(username){
     const sql = "SELECT * FROM category WHERE username = $1";
-    const values = [userid];
+    const values = [username];
     return pool.query(sql, values);
-}
-
-dbMethods.getCategoryPublic = function(userid, public){
-    const sql = "SELECT * FROM category WHERE username = $1 AND share = $2";
-    const values = [userid, public];
-    console.log(userid, public);
-    return pool.query(sql, values);
-}
+}  
 
 dbMethods.deleteItem = function(username, id){
     const sql = "DELETE FROM content WHERE username = $1 AND id = $2";
@@ -69,22 +61,9 @@ dbMethods.createCategory = function(name, username, share){
     return pool.query(sql, values);
 }
 
-dbMethods.getCategory = function(id, username){
-    const sql = "SELECT * FROM category WHERE id = $1 AND username = $2";
-    const values = [id, username];
-    return pool.query(sql, values);
-}
-
 dbMethods.deleteCategory = function(id, username){
     const sql = 'DELETE FROM category WHERE id = $1 AND username = $2 RETURNING *';
     const values = [id, username];
-    return pool.query(sql, values);
-}
-
-// Delete category with its content
-dbMethods.deleteCategoryContent = function(id){
-    const sql = "DELETE FROM content WHERE categoryid = $1"
-    const values = [id];
     return pool.query(sql, values);
 }
 

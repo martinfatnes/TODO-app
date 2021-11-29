@@ -23,7 +23,6 @@ function createUserPage(){
                     statusMsg.innerHTML = data.err;
                     throw data.err;
                 }
-    
                 statusMsg.innerHTML = data.msg;
             }
             catch(err){
@@ -38,7 +37,10 @@ function createUserPage(){
 
 function createCredentialString(username, password){
     const comindStr = username + ":" + password;
+
+    //Creates a base64 ACII string
     const b64String = btoa(comindStr);
 
+    //Returns base64 string + basic (basic base64)
     return 'basic ' + b64String;
 }

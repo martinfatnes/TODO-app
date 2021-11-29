@@ -144,22 +144,16 @@ header>div{
 /* Public list*/
 .publicList{
     display: grid;
-    grid-template-columns: auto auto auto auto;
+    grid-template-columns: auto auto auto;
     padding: 100px;
 }
 
 .publicList>div{
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: auto;
     margin: 10px;
     text-align: center;
-    border: solid black 1px;
     padding: 5px;
-    cursor: pointer;
-}
-
-.publicList>div:hover{
-    background-color: cadetblue;
 }
 
 .header{
@@ -169,3 +163,4 @@ header>div{
 .navBar{
     position: fixed;
 }
+
