@@ -49,6 +49,12 @@ dbMethods.getAllCategoriesUser = function(username){
     return pool.query(sql, values);
 }  
 
+dbMethods.getCategory = function(id, username){
+    const sql = "SELECT * FROM category WHERE id = $1 AND username = $2";
+    const values = [id, username];
+    return pool.query(sql, values);
+}
+
 dbMethods.deleteItem = function(username, id){
     const sql = "DELETE FROM content WHERE username = $1 AND id = $2";
     const values = [username, id];
