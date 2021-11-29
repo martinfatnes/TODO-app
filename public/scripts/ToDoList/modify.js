@@ -125,3 +125,37 @@ async function updateCompletedItems(id, status){
         console.log(err);
     }
 }
+
+async function updateTag(id, tag){
+  const url = '/api/tags';
+  console.log("shit");
+  const updata = {
+      id: id,
+      tag: tag
+  }
+
+  const cfg = {
+    method: "PUT",
+    headers: {
+        "content-type":"application/json"
+    },
+    body: JSON.stringify(updata) 
+}
+
+    try{
+        const respons = await fetch(url, cfg);
+        const data = await respons.json();
+
+        if(respons.status != 200){
+            throw "Could not update"
+        }
+
+        refresh();
+        return data;
+    }
+    catch(err){
+        console.log(err);
+    }
+}
+
+updateTag(196, "crazy");

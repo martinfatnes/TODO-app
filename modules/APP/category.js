@@ -56,4 +56,21 @@ router.get('/api/category/all', protect, async (req, res, next) => {
     }
 })
 
+router.put('/api/tags', async (req, res, next) =>{
+    const updata = req.body;
+
+    console.log(updata);
+    
+    try{
+        const data = await db.getTag(updata.id, updata.tag);
+        
+        if(data.rows.length > 0){
+            res.status(200).json(data.rows);
+        }
+    }
+    catch(err){
+        next(err);
+    }
+})
+
 module.exports = router;
