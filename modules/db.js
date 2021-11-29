@@ -13,12 +13,6 @@ dbMethods.createToDoItem = function(content, username, categoryid, share){
     return pool.query(sql, values);
 }
 
-dbMethods.getContentOfCategory = function(username, categoryId){
-    const sql = "SELECT * FROM content WHERE username = $1 AND categoryid = $2";
-    const values = [username, categoryId];
-    return pool.query(sql, values);
-}
-
 dbMethods.getContent = function(){
     const sql = "SELECT * FROM content";
     return pool.query(sql);
@@ -67,22 +61,9 @@ dbMethods.createCategory = function(name, username, share){
     return pool.query(sql, values);
 }
 
-dbMethods.getCategory = function(id, username){
-    const sql = "SELECT * FROM category WHERE id = $1 AND username = $2";
-    const values = [id, username];
-    return pool.query(sql, values);
-}
-
 dbMethods.deleteCategory = function(id, username){
     const sql = 'DELETE FROM category WHERE id = $1 AND username = $2 RETURNING *';
     const values = [id, username];
-    return pool.query(sql, values);
-}
-
-// Delete category with its content
-dbMethods.deleteCategoryContent = function(id){
-    const sql = "DELETE FROM content WHERE categoryid = $1"
-    const values = [id];
     return pool.query(sql, values);
 }
 

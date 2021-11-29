@@ -6,7 +6,7 @@ const router = express.Router();
 router.post('/api/category', protect, async (req, res, next) => {
     const updata = req.body;
     const username = res.locals.username;
-    
+
     try{
         const data = await db.createCategory(updata.header, username, updata.shareStatus);
 
@@ -42,7 +42,7 @@ router.delete('/api/category/:id', protect, async (req, res, next) => {
 
 router.get('/api/category/all', protect, async (req, res, next) => {
     const username = res.locals.username;
-
+    
     try{
         const data = await db.getAllCategoriesUser(username);
         const items = await db.getAllContentUser(username);

@@ -6,7 +6,6 @@ const router = express.Router();
 router.delete('/api/delete/content', protect, async (req, res, next) => {
     const updata = req.body;
     const username = res.locals.username;
-
     try{    
         const data = await db.deleteItem(username, updata.id);
 
@@ -22,7 +21,7 @@ router.delete('/api/delete/content', protect, async (req, res, next) => {
 router.post('/api/content', protect, async (req, res, next) => {
     const updata = req.body;
     const username = res.locals.username;
-    console.log("geting category");
+    
     try{
         const categoryid = await db.getCategory(updata.header, username);
         const data = await db.createToDoItem(updata.content, username, categoryid.rows[0].id, updata.shareStatus);
@@ -40,7 +39,6 @@ router.post('/api/content', protect, async (req, res, next) => {
 })
 
 router.get('/api/content/public', async (req, res, next) => {
-    
     try{
         const categories = await db.getPublicCategory();
         const items = await db.getContent()
@@ -60,6 +58,7 @@ router.get('/api/content/public', async (req, res, next) => {
 
 router.get('/api/content/all/user', protect, async (req, res, next) => {
     const username = res.locals.username;
+
     try{
         const categories = await db.getAllCategoriesUser(username);
         const items = await db.getAllContentUser(username);
@@ -79,7 +78,7 @@ router.get('/api/content/all/user', protect, async (req, res, next) => {
 
 router.get('/api/content/user', protect, async (req, res, next) => {
     const username = res.locals.username;
-    
+
     try{
         const data = await db.getContentForUser(username);
         
@@ -94,7 +93,7 @@ router.get('/api/content/user', protect, async (req, res, next) => {
 
 router.put('/api/updateContent', async (req, res, next) => {
     const updata = req.body;
-    
+
     try{
         const data = await db.updateToDoItem(updata.content, updata.id);
 
@@ -109,7 +108,7 @@ router.put('/api/updateContent', async (req, res, next) => {
 
 router.put('/api/update/complteded', async (req, res, next) => {
     const updata = req.body;
-
+    
     try{
         const data = await db.updateCompletedItems(updata.id, updata.status);
         if(data.rows.length > 0){
