@@ -44,7 +44,7 @@ async function LoadCreateUser(){
     refreshContent(SIGNUP, createUserPage);
 }
 
-async function flash(){
+async function LoadCreateToDoItems(){
     refreshContent(FLASH, toDoClientAdd);
 }
 
@@ -68,7 +68,7 @@ function callapsItems(){
 
 window.onload = function(){
     if(localStorage.getItem("token")){
-        flash();
+        LoadCreateToDoItems();
     }
     else{
         LoadLoginPage();

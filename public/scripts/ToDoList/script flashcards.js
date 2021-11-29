@@ -10,7 +10,6 @@ function toDoClientAdd(){
   const checkPublic = document.getElementById('checkPublc');
 
   async function categorySelector(){
-    
     try{
       const data = await getCategory();
 

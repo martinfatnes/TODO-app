@@ -25,6 +25,16 @@ dbMethods.getPublicContent = function(categoryid){
     return pool.query(sql, values);
 }
 
+dbMethods.getCategoryAndItems = function(){
+    const sql = "SELECT name, cat.username, cat.categoryid, content, done FROM content AS cat, category AS te WHERE cat.categoryid = te.id";
+    return pool.query(sql);
+}
+
+dbMethods.getContent = function(){
+    const sql = "SELECT * FROM content";
+    return pool.query(sql);
+}
+
 dbMethods.updateToDoItem = function(content, id){
     const sql = "UPDATE content SET content = $1 WHERE id = $2 RETURNING *";
     const values = [content, id];
@@ -85,6 +95,7 @@ dbMethods.deleteCategory = function(id, username){
 dbMethods.deleteCategoryContent = function(id){
     const sql = "DELETE FROM content WHERE categoryid = $1"
     const values = [id];
+    console.log(values);
     return pool.query(sql, values);
 }
 

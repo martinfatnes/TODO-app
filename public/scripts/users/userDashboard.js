@@ -48,6 +48,7 @@ async function changePassword(password, securityPassword){
             const data = await result.json();
     
             if(result.status != 200){
+                statusMsg.innerHTML = data.err;
                 throw data.err;
             }
             statusMsg.innerHTML = data.msg;

@@ -1,13 +1,48 @@
-async function getCategory(){
-    const url = "/api/category/all";
+//DELETE FUNCTIONS_____________________________________
+
+async function deleteCategory(id){
+    const url = `/api/category/${id}`;
     const token = localStorage.getItem('token');
 
     const cfg = {
-        method: "GET",
+        method: "DELETE",
+        headers: {
+            "content-type":"application/json",
+            "autorization": token
+        }
+    }
+
+    try{
+        const respons = await fetch(url, cfg);
+        const data = await respons.json();
+
+        if(respons.status != 200){
+            throw "Coult not delete";
+        }
+        else{
+            console.log(data);
+        }
+    }
+    catch(err){
+        console.log(err);
+    }
+}
+
+async function deleteContent(id){
+    const url = "/api/delete/content";
+    const token = localStorage.getItem('token');
+    
+    const updata = {
+        id: id
+    }
+
+    const cfg = {
+        method: "DELETE",
         headers: {
             "content-type":"application/json",
             "autorization": token
         },
+        body: JSON.stringify(updata) 
     }
 
     try{
@@ -15,9 +50,10 @@ async function getCategory(){
         const data = await respons.json();
 
         if(respons.status != 200){
-            throw "You have no categories";
+            throw "Could not find"
         }
-        
+
+        refresh();
         return data;
     }
     catch(err){
@@ -25,95 +61,21 @@ async function getCategory(){
     }
 }
 
-async function getContent(categoryId){
-    const url = "/api/content/all/" + categoryId;
-    const token = localStorage.getItem('token');
-
-    const cfg = {
-        method: "GET",
-        headers: {
-            "content-type":"application/json",
-            "autorization": token
-        }
-    }
-    
-    try{
-        const respons = await fetch(url, cfg);
-        const data = await respons.json();
-
-        if(respons.status != 200){
-            throw "Category have no related content";
-        }
-
-        return data;
-    }
-    catch(err){
-        console.log(err);
-    }
-}
-
-async function getCategoryPublic(){
-    const url = "/api/category/public/";
-    const token = localStorage.getItem('token');
-
-    const cfg = {
-        method: "GET",
-        headers: {
-            "content-type":"application/json",
-            "autorization": token
-        }
-    }
-
-    try{
-        const respons = await fetch(url, cfg);
-        const data = await respons.json();
-
-        if(respons.status != 200){
-            throw "No public category";
-        }  
-
-        return data;
-    }
-    catch(err){
-        console.log(err);
-    }
-}
-
-async function getContentUnderCategory(){
-    const url = "/api/content/public/";
-
-    const cfg = {
-        method: "GET",
-        headers: {
-            "content-type":"application/json",
-        }
-    }
-
-    try{
-        const respons = await fetch(url, cfg);
-        const data = await respons.json();
-        
-        if(respons.status != 200){
-            return data.msg; 
-        }
-        
-        return data;
-    }
-    catch(err){
-        console.log(err);
-    }
-}
-
-async function getContentUser(){
-    const url = "/api/content/user";
+async function deleteContent(id){
+    const url = "/api/delete/content";
     const token = localStorage.getItem('token');
     
+    const updata = {
+        id: id
+    }
+
     const cfg = {
-        method: "GET",
+        method: "DELETE",
         headers: {
             "content-type":"application/json",
             "autorization": token
-        }
+        },
+        body: JSON.stringify(updata) 
     }
 
     try{
@@ -121,9 +83,10 @@ async function getContentUser(){
         const data = await respons.json();
 
         if(respons.status != 200){
-            throw "You have not posted yet";
+            throw "Could not find"
         }
 
+        refresh();
         return data;
     }
     catch(err){
@@ -131,18 +94,21 @@ async function getContentUser(){
     }
 }
 
+//UPDATE FUNCTIONS_______________________________
+async function updateContent(content, id){
+    const url = "/api/updateContent";
 
-//GET LOCAL CATEGORY
-async function getPublicCategory(){
-    const url = "api/category/public";
-    const token = localStorage.getItem('token');
+    const updata = {
+        content: content,
+        id: id
+    }
 
     const cfg = {
-        method: "GET",
+        method: "PUT",
         headers: {
-            "content-type":"application/json",
-            "autorization": token
-        }
+            "content-type":"application/json"
+        },
+        body: JSON.stringify(updata) 
     }
 
     try{
@@ -150,9 +116,10 @@ async function getPublicCategory(){
         const data = await respons.json();
 
         if(respons.status != 200){
-            throw "Error stuff";
+            throw "Could not find"
         }
 
+        refresh();
         return data;
     }
     catch(err){
@@ -160,6 +127,34 @@ async function getPublicCategory(){
     }
 }
 
-async function test(){
-    console.log(await getPublicCategory());
+async function updateCompletedItems(id, status){
+    const url = "/api/update/complteded";
+
+    const updata = {
+        id: id,
+        status: status
+    }
+
+    const cfg = {
+        method: "PUT",
+        headers: {
+            "content-type":"application/json"
+        },
+        body: JSON.stringify(updata) 
+    }
+
+    try{
+        const respons = await fetch(url, cfg);
+        const data = await respons.json();
+
+        if(respons.status != 200){
+            throw "Could not update"
+        }
+
+        refresh();
+        return data;
+    }
+    catch(err){
+        console.log(err);
+    }
 }
