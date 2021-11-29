@@ -109,7 +109,7 @@ async function refresh(){
           const div = document.createElement('div');
           div.className = "listcard";
           const h2 = document.createElement('h2');
-          h2.innerHTML = value.name;
+          h2.innerHTML = `${value.name} -  <i>#${value.tag}</i>`;
           div.appendChild(h2);
           listcards.appendChild(div);
           for(let items of data[1]){
