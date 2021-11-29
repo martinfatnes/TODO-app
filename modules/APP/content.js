@@ -30,7 +30,7 @@ router.post('/api/content', protect, async (req, res, next) => {
             res.status(200).json({msg: 'Added content'});
         }
         else{
-            throw "Could not create category";
+            res.status(200).json({msg: "Could not create category"});
         }
     }
     catch(err){
