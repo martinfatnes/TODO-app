@@ -19,6 +19,7 @@ button{
   border: 1px solid lightgray;
   border-radius: 5px;
   background: whitesmoke;
+  margin-top: 11px;
 }
 
 button:hover{
@@ -94,7 +95,16 @@ header{background-color: #fff;}
   margin: 10px; 
   background:#fff;
   cursor: pointer;
-  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.9);
+  box-shadow: 0px 0px 4px 0px #444;
+    border-radius: 4px;
+}
+
+li {
+  list-style-type: none;
+  border-radius: 4px;
+  padding: 5px;
+  background: #eee;
+  margin: 10px;
 }
 
 .listcard h2{font-size: 1.5rem; text-align: center;}

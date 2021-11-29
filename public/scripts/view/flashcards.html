@@ -6,7 +6,7 @@
           <h1>Todo app</h1>
           <div>
             <button id="show_card_box">Add list</button>
-            <button id="delete_cards">Delete list</button>
+            <button id="delete_cards" onclick="LoadCategory()">Manage categories</button>
           </div>
         </div>
       </div>
@@ -22,16 +22,17 @@
           <div id="pending-list">
           </div>
           <input id="categoryname" type="text" placeholder="Overskrift">
+          <label for="checkPublic">Public</label>
+            <input type="checkbox" name="" id="checkPublc">
           <textarea id="answer"></textarea>
           <div id="category">
             <select onchange="check()" name="" id="selectCategory">
-          
+            
             </select>
           </div>
           <div>
             <button id="save_card">Save</button> <button id="close_card_box">Close</button>
-            <label for="checkPublic">Public</label>
-            <input type="checkbox" name="" id="checkPublc">
+            
           </div>
         </div>
       </div>

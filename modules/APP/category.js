@@ -8,7 +8,7 @@ router.post('/api/category', protect, async (req, res, next) => {
     const username = res.locals.username;
     console.log(username, updata)
     try{
-        const data = await db.createCategory(updata.header, username, updata.shareStatus);
+        const data = await db.createCategory(updata.header, username, updata.shareStatus, updata.tag);
 
         if(data.rows.length > 0){
             res.status(200).json({msg: 'Added category'});
