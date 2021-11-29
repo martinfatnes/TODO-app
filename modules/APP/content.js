@@ -37,6 +37,9 @@ router.delete('/api/category/:id', protect, async (req, res, next) => {
     catch(err){
         console.log(err);
     }
+
+     //  Sletter også innhold om kategorien hadde noe
+     await deleteCategoryContent();
 })
 
 router.delete('/api/delete/content', protect, async (req, res, next) => {
