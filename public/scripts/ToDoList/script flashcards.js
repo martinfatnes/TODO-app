@@ -1,4 +1,43 @@
 let currentCategory;
+
+function createCategoryHeader() {
+  const categoryname = document.getElementById("categoryname");
+
+  categoryname.addEventListener("keydown", async function(event){
+    const key = event.keyCode;
+    if (key === 13){
+      
+      
+      try{
+        await createCategory(categoryname.value, true);
+        categorySelector()
+        
+      }
+      catch(err){
+        console.log(err);
+      }
+    }
+  })
+}
+
+async function categorySelector(){
+  const dropDown = document.getElementById('selectCategory');
+  try{
+    const data = await getContentUnderCategoryUser();
+
+    for(let value of data[0]){
+      const option = document.createElement('option');
+      option.value = value.id;
+      option.innerHTML = value.name;
+      dropDown.appendChild(option);
+    }
+    check();
+  }
+  catch(err){
+    console.log(err);
+  }
+}
+
 function toDoClientAdd(){
   const addList = document.getElementById("save_card");
   const showCard = document.getElementById('show_card_box');
@@ -6,25 +45,7 @@ function toDoClientAdd(){
   const textEditor = document.getElementById('create_card');
   const text = document.getElementById('answer');
   const items = document.getElementById('items');
-  const dropDown = document.getElementById('selectCategory');
   const checkPublic = document.getElementById('checkPublc');
-
-  async function categorySelector(){
-    try{
-      const data = await getContentUnderCategoryUser();
-
-      for(let value of data[0]){
-        const option = document.createElement('option');
-        option.value = value.id;
-        option.innerHTML = value.name;
-        dropDown.appendChild(option);
-      }
-      check();
-    }
-    catch(err){
-      console.log(err);
-    }
-  }
 
   text.addEventListener('keydown', async function(event){
     const key = event.keyCode;
@@ -67,6 +88,7 @@ function toDoClientAdd(){
   })
 
   categorySelector();
+  createCategoryHeader();
   refresh();
 }
 
@@ -76,7 +98,7 @@ async function refresh(){
 
   try{
       const data = await getContentUnderCategoryUser();
-      if(!data.msg){
+      if(data.res != 200){
         for(let value of data[0]){
           const div = document.createElement('div');
           div.className = "listcard";
