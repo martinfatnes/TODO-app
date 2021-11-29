@@ -7,9 +7,10 @@ async function publicLists(){
             const div = document.createElement('div');
             div.className = "listcard";
             const header = document.createElement('h2');
+            const publisher = document.createElement('p');
+            publisher.innerHTML = `Published by: ${category.username}`;
             header.innerHTML = category.name;
             div.appendChild(header);
-            container.appendChild(div);
             for(let items of data[1]){
                 if(category.id === items.categoryid){
                     const p = document.createElement('p');
@@ -25,6 +26,8 @@ async function publicLists(){
                     div.appendChild(divContent);
                 }
             }
+            div.appendChild(publisher);
+            container.appendChild(div);
         }
     }
     catch(err){

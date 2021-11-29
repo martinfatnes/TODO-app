@@ -6,7 +6,7 @@ const router = express.Router();
 router.post('/api/category', protect, async (req, res, next) => {
     const updata = req.body;
     const username = res.locals.username;
-
+    
     try{
         const data = await db.createCategory(updata.header, username, updata.shareStatus);
 
@@ -25,7 +25,7 @@ router.post('/api/category', protect, async (req, res, next) => {
 router.delete('/api/category/:id', protect, async (req, res, next) => {
     const id = req.params.id;
     const username = res.locals.username;
-
+    
     try{
         const data = await db.deleteCategory(id, username);
         if(data.rows.length > 0){
@@ -42,23 +42,11 @@ router.delete('/api/category/:id', protect, async (req, res, next) => {
 
 router.get('/api/category/all', protect, async (req, res, next) => {
     const username = res.locals.username;
-    
+
     try{
         const data = await db.getAllCategoriesUser(username);
+        const items = await db.getAllContentUser(username);
         
-        if(data.rows.length > 0){
-            res.status(200).json(data.rows);
-        }
-    }
-    catch(err){
-        next(err);
-    }
-})
-
-router.get('/api/category/public', async (req, res, next) => {
-    try{
-        const data = await db.getPublicCategory();
-
         if(data.rows.length > 0){
             res.status(200).json(data.rows);
         }

@@ -6,7 +6,7 @@ const router = express.Router();
 router.delete('/api/delete/content', protect, async (req, res, next) => {
     const updata = req.body;
     const username = res.locals.username;
-    
+
     try{    
         const data = await db.deleteItem(username, updata.id);
 
@@ -22,7 +22,7 @@ router.delete('/api/delete/content', protect, async (req, res, next) => {
 router.post('/api/content', protect, async (req, res, next) => {
     const updata = req.body;
     const username = res.locals.username;
-
+    console.log("geting category");
     try{
         const categoryid = await db.getCategory(updata.header, username);
         const data = await db.createToDoItem(updata.content, username, categoryid.rows[0].id, updata.shareStatus);
@@ -39,25 +39,8 @@ router.post('/api/content', protect, async (req, res, next) => {
     }
 })
 
-router.post('/api/unlistedContent', protect, async (req, res, next) => {
-    const updata = req.body;
-    const username = res.locals.username;
-    try{
-        const data = await db.createToDoItem(updata.content, username, null, updata.shareStatus);
-
-        if(data.rows.length > 0){
-            res.status(200).json({msg: "unlisted items"});
-        }
-        else{
-            throw "could nt add"
-        }
-    }
-    catch(err){
-        next(err);
-    }
-})
-
 router.get('/api/content/public', async (req, res, next) => {
+    
     try{
         const categories = await db.getPublicCategory();
         const items = await db.getContent()
@@ -75,9 +58,28 @@ router.get('/api/content/public', async (req, res, next) => {
     }
 })
 
+router.get('/api/content/all/user', protect, async (req, res, next) => {
+    const username = res.locals.username;
+    try{
+        const categories = await db.getAllCategoriesUser(username);
+        const items = await db.getAllContentUser(username);
+        const arr = [categories.rows, items.rows];
+        
+        if(categories.rows.length > 0){
+            res.status(200).json(arr);
+        }
+        else{
+            res.status(404).json({msg: "No data"});
+        }
+    }
+    catch(err){
+        next(err);
+    }
+})
+
 router.get('/api/content/user', protect, async (req, res, next) => {
     const username = res.locals.username;
-
+    
     try{
         const data = await db.getContentForUser(username);
         
@@ -90,29 +92,9 @@ router.get('/api/content/user', protect, async (req, res, next) => {
     }
 })
 
-
-router.get('/api/content/all/:id', protect, async (req, res, next) => {
-    const username = res.locals.username;
-    const categoryId = req.params.id;
-
-    try{
-        const data = await db.getContentOfCategory(username, categoryId);
-
-        if(data.rows.length > 0){
-            res.status(200).json(data.rows);
-        }
-        else{
-            res.status(404).json({msg: "no content here"});
-        }
-    }
-    catch(err){
-        next(err);
-    }
-})
-
 router.put('/api/updateContent', async (req, res, next) => {
     const updata = req.body;
-
+    
     try{
         const data = await db.updateToDoItem(updata.content, updata.id);
 
@@ -127,6 +109,7 @@ router.put('/api/updateContent', async (req, res, next) => {
 
 router.put('/api/update/complteded', async (req, res, next) => {
     const updata = req.body;
+
     try{
         const data = await db.updateCompletedItems(updata.id, updata.status);
         if(data.rows.length > 0){

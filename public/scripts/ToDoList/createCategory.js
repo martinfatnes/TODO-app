@@ -21,11 +21,11 @@ const categoryPage = () => {
    
     }())
 
-    savebtn.addEventListener('click', ()=> {
+    savebtn.addEventListener('click', async ()=> {
         const name = document.getElementById('input_category_name').value;
         const ispublic = document.getElementById('is_public').checked
         try {
-            createCategory(name, ispublic); 
+            await createCategory(name, ispublic); 
             view.innerHTML = '<p style="color:green">Kategoriener lagret! <hr /><button onclick="LoadCategory()">Tilbake</button></p>';  
         } catch (error) {
             view.innerHTML = `<p style="color:red">${error} <hr/><button onclick="LoadCategory()">Tilbake</button></p> ` 

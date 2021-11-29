@@ -150,10 +150,9 @@ header>div{
 
 .publicList>div{
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: auto;
     margin: 10px;
     text-align: center;
-    border: solid black 1px;
     padding: 5px;
 }
 

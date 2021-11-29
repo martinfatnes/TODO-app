@@ -1,7 +1,7 @@
 async function createCategory(categoryName, public){
     const url = "/api/category";
     const token = localStorage.getItem('token');
-
+   
     const updata = {
         header: categoryName,
         shareStatus: public
@@ -40,7 +40,7 @@ async function createContent(categoryId, content, public){
         content: content,
         shareStatus: public
     }
-
+    
     const cfg = {
         method: "POST",
         headers: {
