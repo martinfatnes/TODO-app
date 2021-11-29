@@ -40,13 +40,12 @@ router.delete('/api/category/:id', protect, async (req, res, next) => {
     }
 })
 
-router.put('/api/category/all', async (req, res, next) => {
-    const updata = req.body;
-
-    console.log(updata);
+router.get('/api/category/all', protect, async (req, res, next) => {
+    const username = res.locals.username;
     
     try{
-        const data = await db.getTag()
+        const data = await db.getAllCategoriesUser(username);
+        const items = await db.getAllContentUser(username);
         
         if(data.rows.length > 0){
             res.status(200).json(data.rows);
