@@ -2,6 +2,8 @@ async function createCategory(categoryName, public){
     const url = "/api/category";
     const token = localStorage.getItem('token');
    
+    console.log(categoryName, public);
+
     const updata = {
         header: categoryName,
         shareStatus: public
