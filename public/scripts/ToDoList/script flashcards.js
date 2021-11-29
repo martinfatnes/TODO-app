@@ -2,6 +2,7 @@ let currentCategory;
 
 function createCategoryHeader() {
   const categoryname = document.getElementById("categoryname");
+  const checkPublic = document.getElementById('checkPublc');
 
   categoryname.addEventListener("keydown", async function(event){
     const key = event.keyCode;
@@ -9,8 +10,13 @@ function createCategoryHeader() {
       
       
       try{
+        if(checkPublic.checked){
         await createCategory(categoryname.value, true);
         categorySelector()
+        }else{
+          await createCategory(categoryname.value, false);
+        categorySelector()
+        }
         
       }
       catch(err){
