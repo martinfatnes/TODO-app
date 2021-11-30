@@ -12,7 +12,8 @@ router.post("/api/category", protect, async (req, res, next) => {
       updata.header,
       username,
       updata.shareStatus,
-      updata.tag
+      updata.tag,
+      updata.date
     );
 
     if (data.rows.length > 0) {
