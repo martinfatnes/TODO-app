@@ -112,8 +112,9 @@ async function refresh(){
           const h2 = document.createElement('h2');
           const tagParagraph = document.createElement('p');
           h2.innerHTML = `${value.name}`;
-          if(value.tag != null){
+          if(value.tag != "" || null){
             tagParagraph.innerHTML = `<i>#${value.tag}</i>`;
+            console.log(value.tag);
           }else{
             tagParagraph.innerHTML = "";
           }
