@@ -1,7 +1,7 @@
 async function publicLists(){
     const container = document.getElementById('publicContainer');
     const searchbar = document.getElementById("searchbar");
-    let tagSearch = [];
+    //let tagSearch = [];
 
         searchbar.addEventListener('keyup', (e) => {
             console.log(e.target.value);

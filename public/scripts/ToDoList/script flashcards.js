@@ -110,8 +110,15 @@ async function refresh(){
           const div = document.createElement('div');
           div.className = "listcard";
           const h2 = document.createElement('h2');
-          h2.innerHTML = `${value.name} -  <i>#${value.tag}</i>`;
+          const tagParagraph = document.createElement('p');
+          h2.innerHTML = `${value.name}`;
+          if(value.tag != null){
+            tagParagraph.innerHTML = `<i>#${value.tag}</i>`;
+          }else{
+            tagParagraph.innerHTML = "";
+          }
           div.appendChild(h2);
+          div.appendChild(tagParagraph);
           listcards.appendChild(div);
           for(let items of data[1]){
             if(value.id === items.categoryid){
