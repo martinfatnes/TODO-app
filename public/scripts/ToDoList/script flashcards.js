@@ -30,6 +30,7 @@ async function categorySelector(){
   const dropDown = document.getElementById('selectCategory');
   try{
     const data = await getContentUnderCategoryUser();
+    const test = data[0].reverse();
 
     for(let value of data[0]){
       const option = document.createElement('option');
