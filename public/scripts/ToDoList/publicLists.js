@@ -85,7 +85,10 @@ async function publicLists(){
             div.appendChild(tagParagraph);
             container.appendChild(div);
         }
-  } catch (err) {
+        div.appendChild(publisher);
+        container.appendChild(div);
+      }
+    catch (err) {
     console.log(err);
-  }
+    }
 }

@@ -29,13 +29,8 @@ dbMethods.updateToDoItem = function (content, id) {
 };
 
 dbMethods.updateCompletedItems = function (id, status) {
-  if (status) {
-    const sql = "UPDATE content SET done = false WHERE id = $1 RETURNING *";
-    const values = [id];
-    return pool.query(sql, values);
-  }
-  const sql = "UPDATE content SET done = true WHERE id = $1 RETURNING *";
-  const values = [id];
+  const sql = "UPDATE content SET done = $2 WHERE id = $1 RETURNING *";
+  const values = [id, status];
   return pool.query(sql, values);
 };
 
@@ -47,17 +42,21 @@ dbMethods.getAllContentUser = function (username) {
 
 //CATEGORY---------------------------------------------------
 
+dbMethods.updateCategory = function(name, share, tag, date, id){
+  const sql = "UPDATE category SET name = $1, share = $2, tag = $3, date = $4 WHERE id = $5";
+  const values = [name, share, tag, date, id];
+  return pool.query(sql, values);
+}
+
 dbMethods.setDate = function (date, categoryId) {
   const sql = "UPDATE category SET date = $1 WHERE id = $2 RETURNING *";
   const values = [categoryId, date];
-  console.log(values);
   return pool.query(sql, values);
 };
 
 dbMethods.getTag = function (id, tag) {
   const sql = "UPDATE category SET tag = $1 WHERE id = $2 RETURNING *";
   const values = [tag, id];
-  console.log(values);
   return pool.query(sql, values);
 };
 
@@ -83,7 +82,6 @@ dbMethods.createCategory = function (name, username, share, tag, date) {
   const sql =
     "INSERT INTO category (id, name, username, share, tag, date) VALUES(DEFAULT, $1, $2, $3, $4, $5) RETURNING *";
   const values = [name, username, share, tag, date];
-  console.log(values);
   return pool.query(sql, values);
 };
 
