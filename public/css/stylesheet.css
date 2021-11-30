@@ -176,3 +176,9 @@ input {
 .w100{
     width: 100%;
 }
+
+.tagfield{
+    
+    justify-content: space-between;
+    text-align: center;
+    }
