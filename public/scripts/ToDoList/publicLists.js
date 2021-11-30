@@ -37,8 +37,11 @@ async function publicLists(){
             div.appendChild(publisher);
             container.appendChild(div);
         }
+      }
+      div.appendChild(publisher);
+      container.appendChild(div);
     }
-    catch(err){
-        console.log(err);
-    }
+  } catch (err) {
+    console.log(err);
+  }
 }
