@@ -167,8 +167,10 @@ async function refresh(data){
                 }
               })
             }
-            
           }
+          const ptee = document.createElement("p");
+          ptee.innerHTML = value.date;
+          div.appendChild(ptee);
         }
 }
 

@@ -1,70 +1,67 @@
-async function createCategory(categoryName, public, tag, date){
-    const url = "/api/category";
-    const token = localStorage.getItem('token');
-   
-    console.log(categoryName, public);
+async function createCategory(categoryName, public, tag, date) {
+  const url = "/api/category";
+  const token = localStorage.getItem("token");
 
-    const updata = {
-        header: categoryName,
-        shareStatus: public,
-        tag: tag,
-        date: date
-    }
+  console.log(categoryName, public);
 
-    const cfg = {
-        method: "POST",
-        headers: {
-            "content-type":"application/json",
-            "autorization": token
-        },
-        body: JSON.stringify(updata)
-    }
+  const updata = {
+    header: categoryName,
+    shareStatus: public,
+    tag: tag,
+    date: date,
+  };
 
-    try{
-        const respons = await fetch(url, cfg);
-        const data = await respons.json();
+  const cfg = {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+      autorization: token,
+    },
+    body: JSON.stringify(updata),
+  };
 
-        if(respons.status != 200){
-            throw "Coult not create";
-        }
-        else{
-            console.log(data.msg);
-        }
+  try {
+    const respons = await fetch(url, cfg);
+    const data = await respons.json();
+
+    if (respons.status != 200) {
+      throw "Coult not create";
+    } else {
+      console.log(data.msg);
     }
-    catch(err){
-        console.log(err);
-    }
+  } catch (err) {
+    console.log(err);
+  }
 }
 
-async function createContent(categoryId, content, public){
-    const url = "/api/content";
-    const token = localStorage.getItem('token');
-    const updata = {
-        header: categoryId,
-        content: content,
-        shareStatus: public
-    }
-    
-    const cfg = {
-        method: "POST",
-        headers: {
-            "content-type":"application/json",
-            "autorization": token
-        },
-        body: JSON.stringify(updata)
-    }
+async function createContent(categoryId, content, public) {
+  const url = "/api/content";
+  const token = localStorage.getItem("token");
+  const updata = {
+    header: categoryId,
+    content: content,
+    shareStatus: public,
+  };
 
-    try{
-        const respons = await fetch(url, cfg);
-        const data = await respons.json();
+  const cfg = {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+      autorization: token,
+    },
+    body: JSON.stringify(updata),
+  };
 
-        if(respons.status != 200){
-            throw "Coult not create";
-        }
-        refresh();
-        return respons.status;
+  try {
+    const respons = await fetch(url, cfg);
+    const data = await respons.json();
+
+    if (respons.status != 200) {
+      throw "Coult not create";
     }
-    catch(err){
-        console.log(err);
-    }
+    refresh();
+    return respons.status;
+  } catch (err) {
+    console.log(err);
+  }
 }

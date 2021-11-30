@@ -77,7 +77,6 @@ async function setDate(categoryId, date) {
   try {
     const respons = await fetch(url, cfg);
     const data = await respons.json();
-    s;
 
     if (respons.status != 200) {
       throw "Could not find";
