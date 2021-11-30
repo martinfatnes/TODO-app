@@ -89,7 +89,6 @@ async function setDate(categoryId, date) {
     console.log(err);
   }
 }
-setDate(271, new Date(Date.now()));
 
 async function updateContent(content, id) {
   const url = "/api/updateContent";

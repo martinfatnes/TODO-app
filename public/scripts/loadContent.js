@@ -45,7 +45,7 @@ async function LoadCreateUser(){
 }
 
 async function LoadCreateToDoItems(){
-    refreshContent(FLASH, toDoClientAdd);
+    refreshContent(FLASH, loadData);
 }
 
 async function LoadPublic(){
