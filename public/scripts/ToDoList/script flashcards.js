@@ -95,39 +95,33 @@ async function refresh() {
   const listcards = document.getElementById("listcards");
   listcards.innerHTML = "";
 
-  try {
-    const data = await getContentUnderCategoryUser();
-    if (!data.msg) {
-      for (let value of data[0]) {
-        const div = document.createElement("div");
-        div.className = "listcard";
-        const h2 = document.createElement("h2");
-        h2.innerHTML = `${value.name} -  <i>#${value.tag}</i>`;
-        div.appendChild(h2);
-        listcards.appendChild(div);
-        for (let items of data[1]) {
-          if (value.id === items.categoryid) {
-            const divContent = document.createElement("div");
-            divContent.className = "contentDiv";
-            const p = document.createElement("p");
-            const checkbox = document.createElement("input");
-            checkbox.type = "checkbox";
-
-            checkbox.addEventListener("change", function () {
-              updateCompletedItems(items.id, items.done);
-            });
-
-            if (items.share) {
-              p.innerHTML = items.content;
-            } else {
-              p.innerHTML = items.content;
-            }
-            divContent.appendChild(p);
-            if (items.done) {
-              const completed = document.createElement("p");
-              completed.innerHTML = "✔";
-
-              completed.addEventListener("click", function () {
+  try{
+      const data = await getContentUnderCategoryUser();
+      if(!data.msg){
+        for(let value of data[0]){
+          const div = document.createElement('div');
+          div.className = "listcard";
+          const h2 = document.createElement('h2');
+          const tagParagraph = document.createElement('p');
+          h2.innerHTML = `${value.name}`;
+          if(value.tag != "" || null){
+            tagParagraph.innerHTML = `<i>#${value.tag}</i>`;
+            console.log(value.tag);
+          }else{
+            tagParagraph.innerHTML = "";
+          }
+          div.appendChild(h2);
+          div.appendChild(tagParagraph);
+          listcards.appendChild(div);
+          for(let items of data[1]){
+            if(value.id === items.categoryid){
+              const divContent = document.createElement('div');
+              divContent.className = "contentDiv";
+              const p = document.createElement('p');
+              const checkbox = document.createElement('input');
+              checkbox.type = "checkbox";
+    
+              checkbox.addEventListener('change', function(){
                 updateCompletedItems(items.id, items.done);
               });
 
