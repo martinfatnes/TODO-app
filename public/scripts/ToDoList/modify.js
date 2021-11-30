@@ -206,7 +206,7 @@ async function updateCategory(header, public, tag, date, id){
     if(respons.status != 200){
       throw "Could not update"
     }
-
+    
     return data;
   }
   catch(err){

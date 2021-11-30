@@ -93,8 +93,8 @@ router.put("/api/modify/category", async (req, res, next) => {
   try{
     const data = await db.updateCategory(updata.header, updata.public, "#" + updata.tag, updata.date, updata.id);
 
-    if(data.rows.length > 0){
-      res.status(200).json({msg: "Category updated!"});
+    if(data.rowCount > 0){
+      res.status(200).json({msg: "Card was updated!"}).end();
     }
 
   }

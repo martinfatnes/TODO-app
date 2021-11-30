@@ -39,6 +39,7 @@ function TextEditor(){
                 items.innerHTML = "";
                 outPutToDb = "";
                 text.value = "";
+                refreshPageContent();
             } catch (err) {
                 console.log(err);
             }
@@ -100,14 +101,24 @@ function outPutContent(data){
                 const checkbox = document.createElement('input');
                 checkbox.type = "checkbox";
         
-                checkbox.addEventListener('change', function(){
-                    updateCompletedItems(content.id, true);
-                    refreshPageContent();
+                checkbox.addEventListener('change', async function(){
+                    try{
+                        await updateCompletedItems(content.id, true);
+                        refreshPageContent();
+                    }
+                    catch(err){
+                        console.log(err);
+                    }
                 });
 
-                completed.addEventListener('click', function(){
-                    updateCompletedItems(content.id, false);
-                    refreshPageContent();
+                completed.addEventListener('click', async function(){
+                    try{
+                        await updateCompletedItems(content.id, false);
+                        refreshPageContent();
+                    }
+                    catch(err){
+                        console.log(err);
+                    }
                 })
                 
                 p.innerHTML = content.content;
@@ -119,6 +130,31 @@ function outPutContent(data){
                     contentDiv.appendChild(checkbox);
                 }
                 div.appendChild(contentDiv);
+
+                p.addEventListener('click', function(){
+                    const inputField = document.createElement('input');
+                    if(contentDiv.children[2]){
+                        contentDiv.removeChild(contentDiv.children[2]);
+                    }
+                    else{
+                        inputField.placeholder = content.content;
+                        contentDiv.appendChild(inputField);
+
+                        inputField.addEventListener('keydown', async function(event){
+                            const key = event.keyCode;
+
+                            if(key === 13){
+                                try{
+                                    await updateContent(inputField.value, content.id);
+                                    refreshPageContent();
+                                }
+                                catch(err){
+                                    console.log(err);
+                                }
+                            }
+                        })
+                    }
+                })
             }
         }
 
@@ -130,6 +166,21 @@ function outPutContent(data){
         editBtn.addEventListener('click', function(){
             editTodoCard(category);
         })
+
+        if(TODAY > new Date(category.date)){
+            const Overdue = document.createElement('h1');
+            Overdue.id = "overdue";
+            const deleteBtn = document.createElement('button');
+            deleteBtn.id = "delBtn";
+            deleteBtn.innerHTML = "Delete list";
+            Overdue.innerHTML = "List is over due ❌";
+            deleteBtn.addEventListener('click', function(){
+                deleteCategory(category.id);
+                refreshPageContent();
+            })
+            div.appendChild(Overdue);
+            div.appendChild(deleteBtn);
+        }
 
         div.appendChild(date);
         div.appendChild(tag);
@@ -190,6 +241,15 @@ function editTodoCard(cardInfo){
     listcards.appendChild(div);
 
     submit.addEventListener('click', function(){
-        updateCategory(cardHeader.value, public.checked, tag.value, date.value, cardInfo.id);
+        UpdateListFunction(cardHeader.value, public.checked, tag.value, date.value, cardInfo.id);
     })
+}
+
+async function UpdateListFunction(header, public, tag, date, id){
+    try{
+        await updateCategory(header, public, tag, date, id);
+        refreshPageContent();
+    }catch(err){
+        console.log(err);
+    }
 }
