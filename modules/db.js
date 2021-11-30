@@ -33,72 +33,6 @@ dbMethods.updateCompletedItems = function (id, status) {
     const sql = "UPDATE content SET done = false WHERE id = $1 RETURNING *";
     const values = [id];
     return pool.query(sql, values);
-<<<<<<< HEAD
-}
-
-dbMethods.getAllContentUser = function(username){
-    const sql = "SELECT * FROM content WHERE username = $1";
-    const values = [username];
-    return pool.query(sql, values);
-} 
-
-///------------------CAtegory
-
-dbMethods.setDate = function(categoryid, date){
-    const sql = "UPDATE categry SET setDate = $2 WHERE id = $1 RETURNING *";
-    const values = [categoryid, date];
-    console.log(values);
-    return pool.query(sql, values);
-}
-
-dbMethods.getTag = function(id, tag){
-    const sql = "UPDATE category SET tag = $1 WHERE id = $2 RETURNING *";
-    const values = [tag, id];
-    console.log(values);
-    return pool.query(sql, values);
-}
-
-dbMethods.getAllCategoriesUser = function(username){
-    const sql = "SELECT * FROM category WHERE username = $1";
-    const values = [username];
-    return pool.query(sql, values);
-}  
-
-dbMethods.getCategory = function(id, username){
-    const sql = "SELECT * FROM category WHERE id = $1 AND username = $2";
-    const values = [id, username];
-    return pool.query(sql, values);
-}
-
-dbMethods.deleteItem = function(username, id){
-    const sql = "DELETE FROM content WHERE username = $1 AND id = $2";
-    const values = [username, id];
-    return pool.query(sql, values);
-}
-
-dbMethods.createCategory = function(name, username, share, tag){
-    const sql = "INSERT INTO category (id, name, username, share, tag) VALUES(DEFAULT, $1, $2, $3, $4) RETURNING *";
-    const values = [name, username, share, tag];
-    return pool.query(sql, values);
-}
-
-dbMethods.deleteCategory = function(id, username){
-    const sql = 'DELETE FROM category WHERE id = $1 AND username = $2 RETURNING *';
-    const values = [id, username];
-    return pool.query(sql, values);
-}
-
-dbMethods.getPublicCategory = function(){
-    const sql = 'SELECT * FROM category WHERE share = true';
-    return pool.query(sql);
-}
-
-dbMethods.getContentForUser = function(username){
-    const sql = 'SELECT * FROM content WHERE username = $1';
-    const values = [username];
-    return pool.query(sql, values);
-}
-=======
   }
   const sql = "UPDATE content SET done = true WHERE id = $1 RETURNING *";
   const values = [id];
@@ -113,9 +47,10 @@ dbMethods.getAllContentUser = function (username) {
 
 //CATEGORY---------------------------------------------------
 
-dbMethods.setDate = function (categoryId, date) {
-  const sql = "UPDATE category SET setDate  = $2 WHERE id = $1 RETURNING *";
+dbMethods.setDate = function (date, categoryId) {
+  const sql = "UPDATE category SET date = $1 WHERE id = $2 RETURNING *";
   const values = [categoryId, date];
+  console.log(values);
   return pool.query(sql, values);
 };
 
@@ -168,7 +103,6 @@ dbMethods.getContentForUser = function (username) {
   const values = [username];
   return pool.query(sql, values);
 };
->>>>>>> 72c5a1b76f6134ea5a69e066a647f3076af14dad
 
 //USERS---------------------------------------------------
 

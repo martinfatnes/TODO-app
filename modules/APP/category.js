@@ -78,8 +78,9 @@ router.put("/api/setDate", async (req, res, next) => {
 
   categoryId = updata.categoryId;
   date = updata.date;
+  
   try {
-    const data = await db.setDate(categoryId, date);
+    const data = await db.setDate(date, categoryId);
 
     if (data.rows.length > 0) {
       res.status(200).json(data.rows);
@@ -89,20 +90,4 @@ router.put("/api/setDate", async (req, res, next) => {
   }
 });
 
-<<<<<<< HEAD
-router.put('/api/setdate', async (req, res, next) => {
-    const updata = req.body;
-    console.log(updata);
-    
-    try{
-        
-    }
-    catch(err){
-        next(err);
-    }
-})
-
 module.exports = router;
-=======
-module.exports = router;
->>>>>>> 72c5a1b76f6134ea5a69e066a647f3076af14dad
