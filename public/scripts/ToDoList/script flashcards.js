@@ -1,4 +1,4 @@
-let currentCategory;
+//let currentCategory;
 
 function createCategoryHeader() {
   const categoryname = document.getElementById("categoryname");
@@ -99,6 +99,7 @@ async function refresh() {
       const data = await getContentUnderCategoryUser();
       if(!data.msg){
         for(let value of data[0]){
+          console.log(value);
           const div = document.createElement('div');
           div.className = "listcard";
           const h2 = document.createElement('h2');
@@ -176,9 +177,8 @@ async function refresh() {
         div.appendChild(dateP);
         console.log(outdte.toLocaleString("en-US", { month: "long" }));
       }
-    }
-  } catch (err) {
-    console.log(err);
+    } catch (err) {
+      console.log(err);
   }
 }
 

@@ -26,8 +26,9 @@ async function createCategory(categoryName, public, tag, date) {
 
     if (respons.status != 200) {
       throw "Coult not create";
-    } else {
-      console.log(data.msg);
+    } 
+    else {
+      return true;
     }
   } catch (err) {
     console.log(err);
@@ -37,6 +38,7 @@ async function createCategory(categoryName, public, tag, date) {
 async function createContent(categoryId, content, public) {
   const url = "/api/content";
   const token = localStorage.getItem("token");
+  
   const updata = {
     header: categoryId,
     content: content,
@@ -59,8 +61,8 @@ async function createContent(categoryId, content, public) {
     if (respons.status != 200) {
       throw "Coult not create";
     }
-    refresh();
-    return respons.status;
+
+    return data.msg;
   } catch (err) {
     console.log(err);
   }
