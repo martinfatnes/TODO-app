@@ -1,8 +1,16 @@
 async function publicLists(){
     const container = document.getElementById('publicContainer');
+    const searchbar = document.getElementById("searchbar");
+    let tagSearch = [];
+
+        searchbar.addEventListener('keyup', (e) => {
+            console.log(e.target.value);
+        })
 
     try{
         const data = await getContentUnderCategory();
+
+        
         for(let category of data[0]){
             const div = document.createElement('div');
             div.className = "listcard";
