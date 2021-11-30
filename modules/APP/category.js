@@ -26,6 +26,41 @@ router.post("/api/category", protect, async (req, res, next) => {
   }
 });
 
+router.post("/api/category/privacy", protect, async (req, res, next) => {
+  const {share, categoryId} = req.body;
+  const username = res.locals.username;
+
+  try {
+    const data = await db.updateCategoryShare(username, share, categoryId)
+
+    if (data.rows.length > 0) {
+      res.status(200).json({ msg: "Was updated" });
+    } else {
+      res.status(200).json({ msg: "Can't update category shareStatus" });
+    }
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+router.post("/api/category/name", protect, async (req, res, next) => {
+  const {name, categoryId} = req.body;
+  const username = res.locals.username;
+
+  try {
+    const data = await db.updateCategoryName(username, name, categoryId)
+
+    if (data.rows.length > 0) {
+      res.status(200).json({ msg: "Was updated" });
+    } else {
+      res.status(200).json({ msg: "Can't update category name" });
+    }
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+
 router.delete("/api/category/:id", protect, async (req, res, next) => {
   const id = req.params.id;
   const username = res.locals.username;

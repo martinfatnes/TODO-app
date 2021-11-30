@@ -1,4 +1,4 @@
-async function createCategory(categoryName, public, tag, date) {
+async function createCategory(categryName, public, tag, date) {
   const url = "/api/category";
   const token = localStorage.getItem("token");
 

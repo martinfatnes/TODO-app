@@ -85,6 +85,20 @@ dbMethods.createCategory = function (name, username, share, tag, date) {
   return pool.query(sql, values);
 };
 
+dbMethods.updateCategoryShare = function(username, share, categoryId){
+  const sql =
+    "UPDATE category SET share = $1 WHERE username = $2 AND id = $3 RETURNING *";
+  const values = [share, username, categoryId];
+  return pool.query(sql, values);
+}
+
+dbMethods.updateCategoryName = function(username, name, categoryId){
+  const sql =
+    "UPDATE category SET name = $1 WHERE username = $2 AND id = $3 RETURNING *";
+  const values = [name, username, categoryId];
+  return pool.query(sql, values);
+}
+
 dbMethods.deleteCategory = function (id, username) {
   const sql =
     "DELETE FROM category WHERE id = $1 AND username = $2 RETURNING *";
