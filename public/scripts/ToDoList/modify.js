@@ -77,7 +77,6 @@ async function setDate(categoryId, date) {
   try {
     const respons = await fetch(url, cfg);
     const data = await respons.json();
-    s;
 
     if (respons.status != 200) {
       throw "Could not find";
@@ -89,7 +88,6 @@ async function setDate(categoryId, date) {
     console.log(err);
   }
 }
-setDate(333, new Date(Date.now()));
 
 async function updateContent(content, id) {
   const url = "/api/updateContent";
