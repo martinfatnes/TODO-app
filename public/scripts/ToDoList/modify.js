@@ -63,8 +63,8 @@ async function setDate(categoryId, date) {
   const url = "/api/setDate";
 
   const updata = {
-    content: date,
-    id: categoryId,
+    categoryId: date,
+    date: categoryId,
   };
 
   const cfg = {
@@ -89,7 +89,7 @@ async function setDate(categoryId, date) {
     console.log(err);
   }
 }
-setDate(345, Date.now());
+setDate(333, new Date(Date.now()));
 
 async function updateContent(content, id) {
   const url = "/api/updateContent";

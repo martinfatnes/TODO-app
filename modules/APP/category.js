@@ -78,8 +78,9 @@ router.put("/api/setDate", async (req, res, next) => {
 
   categoryId = updata.categoryId;
   date = updata.date;
+
   try {
-    const data = await db.setDate(categoryId, date);
+    const data = await db.setDate(date, categoryId);
 
     if (data.rows.length > 0) {
       res.status(200).json(data.rows);
