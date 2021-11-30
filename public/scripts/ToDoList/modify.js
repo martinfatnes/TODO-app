@@ -151,9 +151,9 @@ async function updateCompletedItems(id, status) {
   }
 }
 
-async function updateTag(id, tag) {
-  const url = "/api/tags";
-  console.log("shit");
+async function updateTag(id, tag){
+  const url = '/api/tags';
+  
   const updata = {
     id: id,
     tag: tag,
@@ -181,5 +181,3 @@ async function updateTag(id, tag) {
     console.log(err);
   }
 }
-
-updateTag(196, "crazy");
