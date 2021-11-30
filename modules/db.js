@@ -79,10 +79,11 @@ dbMethods.deleteItem = function (username, id) {
   return pool.query(sql, values);
 };
 
-dbMethods.createCategory = function (name, username, share, tag) {
+dbMethods.createCategory = function (name, username, share, tag, date) {
   const sql =
-    "INSERT INTO category (id, name, username, share, tag) VALUES(DEFAULT, $1, $2, $3, $4) RETURNING *";
-  const values = [name, username, share, tag];
+    "INSERT INTO category (id, name, username, share, tag, date) VALUES(DEFAULT, $1, $2, $3, $4, $5) RETURNING *";
+  const values = [name, username, share, tag, date];
+  console.log(values);
   return pool.query(sql, values);
 };
 
