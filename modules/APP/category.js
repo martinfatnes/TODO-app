@@ -73,4 +73,16 @@ router.put('/api/tags', async (req, res, next) =>{
     }
 })
 
+router.put('/api/setdate', async (req, res, next) => {
+    const updata = req.body;
+    console.log(updata);
+    
+    try{
+        
+    }
+    catch(err){
+        next(err);
+    }
+})
+
 module.exports = router;

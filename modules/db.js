@@ -43,6 +43,13 @@ dbMethods.getAllContentUser = function(username){
 
 ///------------------CAtegory
 
+dbMethods.setDate = function(categoryid, date){
+    const sql = "UPDATE categry SET setDate = $2 WHERE id = $1 RETURNING *";
+    const values = [categoryid, date];
+    console.log(values);
+    return pool.query(sql, values);
+}
+
 dbMethods.getTag = function(id, tag){
     const sql = "UPDATE category SET tag = $1 WHERE id = $2 RETURNING *";
     const values = [tag, id];

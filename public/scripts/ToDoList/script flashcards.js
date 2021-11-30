@@ -7,15 +7,11 @@ function createCategoryHeader() {
   categoryname.addEventListener("keydown", async function(event){
     const key = event.keyCode;
     if (key === 13){
-      
-      
       try{
         if(checkPublic.checked){
-        await createCategory(categoryname.value, true);
-        categorySelector()
+          await createCategory(categoryname.value, true);
         }else{
           await createCategory(categoryname.value, false);
-        categorySelector()
         }
         
       }
@@ -28,10 +24,12 @@ function createCategoryHeader() {
 
 async function categorySelector(){
   const dropDown = document.getElementById('selectCategory');
+
   try{
     const data = await getContentUnderCategoryUser();
-
-    for(let value of data[0]){
+    const test = data[0].reverse();
+    
+    for(let value of test){
       const option = document.createElement('option');
       option.value = value.id;
       option.innerHTML = value.name;
@@ -98,13 +96,16 @@ function toDoClientAdd(){
   refresh();
 }
 
+function testGetData(data){
+  console.log(data);
+}
+
 async function refresh(){
   const listcards = document.getElementById('listcards');
   listcards.innerHTML = "";
 
   try{
       const data = await getContentUnderCategoryUser();
-      if(data.res != 200){
         for(let value of data[0]){
           const div = document.createElement('div');
           div.className = "listcard";
@@ -184,7 +185,6 @@ async function refresh(){
             }
           }
         } 
-      }
     }
   catch(err){
     console.log(err);
