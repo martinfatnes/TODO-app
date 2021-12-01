@@ -138,18 +138,18 @@ async function refresh() {
             div.appendChild(divContent);
 
             const edit = document.createElement("input");
-            const delteBtn = document.createElement("button");
-            delteBtn.innerHTML = "Delte item";
-            delteBtn.style.display = "none";
+            const deleteBtn = document.createElement("button");
+            deleteBtn.innerHTML = "Delete item";
+            deleteBtn.style.display = "none";
             edit.style.display = "none";
             divContent.appendChild(edit);
-            divContent.appendChild(delteBtn);
+            divContent.appendChild(deleteBtn);
 
             p.addEventListener("click", function () {
-              if (delteBtn.style.display === "none") {
-                delteBtn.style.display = "block";
+              if (deleteBtn.style.display === "none") {
+                deleteBtn.style.display = "block";
               } else {
-                delteBtn.style.display = "none";
+                deleteBtn.style.display = "none";
               }
 
               if (edit.style.display === "none") {
@@ -159,7 +159,7 @@ async function refresh() {
               }
             });
 
-            delteBtn.addEventListener("click", function () {
+            deleteBtn.addEventListener("click", function () {
               deleteContent(items.id);
             });
 
