@@ -172,6 +172,10 @@ router.put("/api/setDate", async (req, res, next) => {
 router.put("/api/modify/category", async (req, res, next) => {
   const updata = req.body;
 
+  if(updata.date === ""){
+    updata.date = null;
+  }
+
   try{
     const data = await db.updateCategory(updata.header, updata.public, "#" + updata.tag, updata.date, updata.id);
 
@@ -181,7 +185,6 @@ router.put("/api/modify/category", async (req, res, next) => {
     else{
       res.status(404).json({msg: "Cant find selected list"}).end();
     }
-
   }
   catch(err){
     next(err);
