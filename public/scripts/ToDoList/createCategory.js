@@ -8,7 +8,7 @@ function sortData(a, b){
   return 0
 }
 
-const categoryPage = () => {
+function categoryPage(){
   const view = document.getElementById("categoryView");
   const savebtn = document.getElementById("save");
   const date = document.getElementById("date");
