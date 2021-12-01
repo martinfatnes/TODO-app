@@ -54,6 +54,11 @@ main{
 }
 
 /*Aside menu*/
+
+.sideMenu{
+    margin-top: 70px;
+}
+
 #dashboardMenu{
     grid-area: "dashboardMenu";
 }
@@ -118,14 +123,14 @@ header>div{
     background-color: rgb(105, 105, 105);
 }
 
-.delteUserBtn{
+.deleteUserBtn{
     margin: 5px;
     padding: 10px;
     background-color: rgb(39, 39, 39);
     color: whitesmoke;
 }
 
-.delteUserBtn:hover{
+.deleteUserBtn:hover{
     background-color: rgb(145, 0, 0);
 }
 
