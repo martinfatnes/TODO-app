@@ -19,8 +19,6 @@ function createUserPage() {
         const respons = await fetch(url, cfg);
         const data = await respons.json();
 
-        location.href = "/view/login.html";
-
         if (respons.status != 200) {
           statusMsg.innerHTML = data.err;
           throw data.err;
@@ -30,7 +28,7 @@ function createUserPage() {
         console.log(err);
       }
     } else {
-      statusMsg.innerHTML = "Inpu fields have to be the same";
+      statusMsg.innerHTML = "Input fields have to be the same";
     }
   });
 }
