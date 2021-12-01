@@ -28,28 +28,28 @@ async function refreshContent(url, page){
     }
 }
 
-async function LoadCategory(){
+function LoadCategory(){
     refreshContent(CRATE_CATEGORY, categoryPage);
 }
 
-async function LoadLoginPage(){
+function LoadLoginPage(){
     refreshContent(LOGIN, loginPage);
 }
 
-async function LoadDashboard(){
+function LoadDashboard(){
     refreshContent(DASHBOARD, dashBoard);
 }
 
-async function LoadCreateUser(){
+function LoadCreateUser(){
     refreshContent(SIGNUP, createUserPage);
 }
 
-async function LoadCreateToDoItems(){
-    refreshContent(FLASH, toDoClientAdd);
+function LoadCreateToDoItems(){
+    refreshContent(MYTODOS, TextEditor);
 }
 
-async function LoadPublic(){
-    refreshContent(PUBLIC, publicLists);
+function LoadPublic(){
+    refreshContent(PUBLIC, getPublicLists);
 }
 
 function LogOut(){

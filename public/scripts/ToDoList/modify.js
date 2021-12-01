@@ -144,7 +144,6 @@ async function updateCompletedItems(id, status) {
       throw "Could not update";
     }
 
-    refresh();
     return data;
   } catch (err) {
     console.log(err);
@@ -175,9 +174,42 @@ async function updateTag(id, tag){
       throw "Could not update";
     }
 
-    refresh();
     return data;
   } catch (err) {
+    console.log(err);
+  }
+}
+
+async function updateCategory(header, public, tag, date, id){
+  const url = "/api/modify/category";
+
+  const updata = {
+    header: header,
+    public: public,
+    tag: tag,
+    date: date,
+    id: id
+  }
+
+  const cfg = {
+    method: "PUT",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify(updata),
+  }
+
+  try{
+    const respons = await fetch(url, cfg);
+    const data = await respons.json();
+
+    if(respons.status != 200){
+      throw "Could not update"
+    }
+    
+    return data;
+  }
+  catch(err){
     console.log(err);
   }
 }
