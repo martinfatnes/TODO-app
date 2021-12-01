@@ -53,7 +53,6 @@ main{
     padding: 100px;
 }
 
-/*Aside menu*/
 #dashboardMenu{
     grid-area: "dashboardMenu";
 }
@@ -175,4 +174,4 @@ input {
     
     justify-content: space-between;
     text-align: center;
-    }
+}
