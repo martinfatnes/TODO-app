@@ -18,11 +18,12 @@ router.post("/api/category", protect, async (req, res, next) => {
 
     if (data.rows.length > 0) {
       res.status(200).json({ msg: "Added category" }).end();
-    } else {
-      throw "Could not create category";
+    } 
+    else if(updata.header = ""){
+      res.status(400).json({msg: "Lists must contain header"}).end();
     }
   } catch (err) {
-    console.log(err);
+    next(err);
   }
 });
 
@@ -34,12 +35,12 @@ router.post("/api/category/privacy", protect, async (req, res, next) => {
     const data = await db.updateCategoryShare(username, share, categoryId)
 
     if (data.rows.length > 0) {
-      res.status(200).json({ msg: "Was updated" });
+      res.status(200).json({ msg: "Was updated" }).end();
     } else {
-      res.status(200).json({ msg: "Can't update category shareStatus" });
+      res.status(200).json({ msg: "Can't update category shareStatus" }).end();
     }
   } catch (err) {
-    console.log(err);
+    next(err);
   }
 });
 
@@ -56,7 +57,7 @@ router.post("/api/category/name", protect, async (req, res, next) => {
       res.status(200).json({ msg: "Can't update category name" });
     }
   } catch (err) {
-    console.log(err);
+    next(err);
   }
 });
 
@@ -69,11 +70,12 @@ router.delete("/api/category/:id", protect, async (req, res, next) => {
     const data = await db.deleteCategory(id, username);
     if (data.rows.length > 0) {
       res.status(200).json({ msg: "Deleted category" }).end();
-    } else {
-      throw "Could not delete";
+    } 
+    else{
+      res.status(404).json({msg: "Undefined List"}).end();
     }
   } catch (err) {
-    console.log(err);
+    next(err);
   }
 });
 
@@ -86,6 +88,10 @@ router.get("/api/category/all", protect, async (req, res, next) => {
     if (data.rows.length > 0) {
       res.status(200).json(data.rows).end();
     }
+    else{
+      res.status(404).json({msg: "No categories found"}).end();
+    }
+
   } catch (err) {
     next(err);
   }
@@ -100,6 +106,10 @@ router.put("/api/tags", async (req, res, next) => {
     if (data.rows.length > 0) {
       res.status(200).json(data.rows).end();
     }
+    else{
+      res.status(404).json({msg: "Cant find selected list"}).end();
+    }
+
   } catch (err) {
     next(err);
   }
@@ -117,6 +127,10 @@ router.put("/api/setDate", async (req, res, next) => {
     if (data.rows.length > 0) {
       res.status(200).json(data.rows).end();
     }
+    else{
+      res.status(404).json({msg: "Cant find selected list"}).end();
+    }
+
   } catch (err) {
     next(err);
   }
@@ -130,6 +144,9 @@ router.put("/api/modify/category", async (req, res, next) => {
 
     if(data.rowCount > 0){
       res.status(200).json({msg: "Card was updated!"}).end();
+    }
+    else{
+      res.status(404).json({msg: "Cant find selected list"}).end();
     }
 
   }

@@ -49,7 +49,7 @@ function LoadCreateToDoItems(){
 }
 
 function LoadPublic(){
-    refreshContent(PUBLIC, publicLists);
+    refreshContent(PUBLIC, getPublicLists);
 }
 
 function LogOut(){

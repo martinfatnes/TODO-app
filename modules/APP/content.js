@@ -12,6 +12,9 @@ router.delete('/api/delete/content', protect, async (req, res, next) => {
         if(data.rowCount > 0){
             res.status(200).json({msg: "Content deleted"}).end();
         }
+        else{
+            res.status(404).json({msg: "Cant find selected item"}).end();
+        }
     }
     catch(err){
         next(err);
@@ -25,11 +28,11 @@ router.post('/api/content', protect, async (req, res, next) => {
         const categoryid = await db.getCategory(updata.header, username);
         const data = await db.createToDoItem(updata.content, username, categoryid.rows[0].id, updata.shareStatus);
         
-        if(data.rows.length > 0 || categoryid.rows.length > 0){
+        if(data.rows.length > 0 && categoryid.rows.length > 0){
             res.status(200).json({msg: 'Added content'}).end();
         }
         else{
-            res.status(200).json({msg: "Could not create category"}).end();
+            res.status(400).json({msg: "Missing required data"}).end();
         }
     }
     catch(err){
@@ -43,7 +46,7 @@ router.get('/api/content/public', async (req, res, next) => {
         const items = await db.getContent()
         const arr = [categories.rows, items.rows];
 
-        if(categories.rows.length > 0){   
+        if(categories.rows.length > 0 && items.rows.length > 0){   
             res.status(200).json(arr).end();
         }
         else{
@@ -83,6 +86,9 @@ router.get('/api/content/user', protect, async (req, res, next) => {
         if(data.rows.length > 0){
             res.status(200).json(data.rows).end();
         }
+        else{
+            res.status(404).json({msg: "You have no content"}).end();
+        }
     }
     catch(err){
         next(err);
@@ -98,6 +104,9 @@ router.put('/api/updateContent', async (req, res, next) => {
         if(data.rows.length > 0){
             res.status(200).json(data.rows).end();
         }
+        else{
+            res.status(404).json({msg: "Cant find selected list"}).end();
+        }
     }
     catch(err){
         next(err);
@@ -111,6 +120,9 @@ router.put('/api/update/complteded', async (req, res, next) => {
         const data = await db.updateCompletedItems(updata.id, updata.status);
         if(data.rows.length > 0){
             res.status(200).json(data.rows).end();
+        }
+        else{
+            res.status(404).json({msg: "Cant find selected list"}).end();
         }
     }
     catch(err){
