@@ -94,7 +94,9 @@ function outPutContent(data){
                 const contentDiv = document.createElement('div');
                 const completed = document.createElement('p');
                 completed.innerHTML = "✔";
+
                 completed.className = "cursorChange";
+
                 contentDiv.className = "contentDiv";
                 const p = document.createElement('p');
                 const checkbox = document.createElement('input');
