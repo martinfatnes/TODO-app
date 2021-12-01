@@ -94,10 +94,13 @@ function outPutContent(data){
                 const contentDiv = document.createElement('div');
                 const completed = document.createElement('p');
                 completed.innerHTML = "✔";
-                completed.style.cursor = "pointer";
+
+                completed.className = "cursorChange";
+
                 contentDiv.className = "contentDiv";
                 const p = document.createElement('p');
                 const checkbox = document.createElement('input');
+                checkbox.className = "cursorChange";
                 checkbox.type = "checkbox";
         
                 checkbox.addEventListener('change', async function(){

@@ -120,7 +120,6 @@ router.put("/api/setDate", async (req, res, next) => {
 
   categoryId = updata.categoryId;
   date = updata.date;
-
   try {
     const data = await db.setDate(date, categoryId);
 

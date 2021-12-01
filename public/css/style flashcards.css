@@ -99,6 +99,10 @@ header{background-color: #fff;}
     border-radius: 4px;
 }
 
+.cursorChange{
+  cursor: pointer;
+}
+
 li {
   list-style-type: none;
   border-radius: 4px;

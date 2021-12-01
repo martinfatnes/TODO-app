@@ -53,11 +53,13 @@ main{
     padding: 100px;
 }
 
+
 /*Aside menu*/
 
 .sideMenu{
     margin-top: 70px;
 }
+
 
 #dashboardMenu{
     grid-area: "dashboardMenu";
@@ -180,4 +182,4 @@ input {
     
     justify-content: space-between;
     text-align: center;
-    }
+}
