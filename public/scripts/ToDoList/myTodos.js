@@ -169,26 +169,28 @@ function outPutContent(data){
             editTodoCard(category);
         })
 
-        if(TODAY.getDate() === new Date(category.date).getDate()){
-            const endMessage = document.createElement('h1');
-            endMessage.innerHTML = "List expires today!";
-            div.appendChild(endMessage);
+        if(category.date != null){
+            if(TODAY.getDate() === new Date(category.date).getDate()){
+                const endMessage = document.createElement('h1');
+                endMessage.innerHTML = "List expires today!";
+                div.appendChild(endMessage);
+            }
+            else if(TODAY > new Date(category.date)){
+                const Overdue = document.createElement('h1');
+                const deleteBtn = document.createElement('button');
+                deleteBtn.id = "delBtn";
+                deleteBtn.innerHTML = "Delete list";
+                Overdue.innerHTML = "List is over due ❌";
+                deleteBtn.addEventListener('click', function(){
+                    deleteCategory(category.id);
+                    refreshPageContent();
+                })
+                div.appendChild(Overdue);
+                div.appendChild(deleteBtn);
+            }
+    
+            div.appendChild(date);
         }
-        else if(TODAY > new Date(category.date)){
-            const Overdue = document.createElement('h1');
-            const deleteBtn = document.createElement('button');
-            deleteBtn.id = "delBtn";
-            deleteBtn.innerHTML = "Delete list";
-            Overdue.innerHTML = "List is over due ❌";
-            deleteBtn.addEventListener('click', function(){
-                deleteCategory(category.id);
-                refreshPageContent();
-            })
-            div.appendChild(Overdue);
-            div.appendChild(deleteBtn);
-        }
-
-        div.appendChild(date);
         div.appendChild(tag);
         div.appendChild(editBtn);
         listcards.appendChild(div);
