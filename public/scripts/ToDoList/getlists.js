@@ -65,7 +65,7 @@ async function getContentUnderCategoryUser(){
         const data = await respons.json();
 
         if(respons.status != 200){
-            return data.msg; 
+            return {msg: data.msg}; 
         }
         return data;
     }

@@ -1,55 +1,7 @@
-/*
-async function djkjsdkds(){
-    try{
-        const data = await getContentUnderCategory();
-        const searchbar = document.getElementById("searchbar");
-        let tagSearch = [];
 
-        for(let value of data[0]){
-            tagSearch.push(value.tag);
-        }
-    
-        searchbar.addEventListener('keyup', (e) => {
-                const searchString = e.target.value;
-                const filteredTags = tagSearch.filter( category =>{
-                return category.includes(searchString);
-            });
-                test(data, filteredTags);
-        });
-        test(data);
-    }
-    catch(err){
-        console.log(err);
-    }
-}
-
-function test(data, filter){
-    for(let value of data[0]){
-        const filterwords = filter.filter(tags => {
-            if(tags.includes(value.tag)){
-                return value;
-            }
-        })
-        console.log(filterwords);
-    }
-}
-
-______________________________________________________*/
 function publicLists(data, filter){
     const container = document.getElementById('publicContainer');
     container.innerHTML = "";
-    //const searchbar = document.getElementById("searchbar");
-    //const tagSearch = [];
-
-    /*
-    searchbar.addEventListener('keyup', (e) => {
-            const searchString = e.target.value;
-            const filteredTags = tagSearch.filter( category =>{
-            return category.includes(searchString);
-        });
-            console.log(filteredTags);
-    });
-    */
         
     for(let category of data[0]){
         if(filter){
@@ -135,7 +87,9 @@ function searchForTags(data){
     const tagSearch = [];
 
     for(let value of data[0]){
-        tagSearch.push(value.tag);
+        if(value.tag != null){
+            tagSearch.push(value.tag);
+        }
     }
 
     searchbar.addEventListener('keyup', (e) => {
@@ -143,7 +97,7 @@ function searchForTags(data){
             const filteredTags = tagSearch.filter( category =>{
             return category.includes(searchString);
         });
-
+        
         for(let filter of filteredTags){
             for(let value of data[0]){
                 if(filter === value.tag){
@@ -152,5 +106,4 @@ function searchForTags(data){
             }
         }
     });
-    
 }
