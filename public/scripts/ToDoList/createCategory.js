@@ -57,7 +57,7 @@ function categoryPage(){
 
 };
 
-const createInput = id => {
+function createInput (id){
   const nameInput = document.createElement('input')
   nameInput.placeholder = "Category name";
   nameInput.id = "newCategoryName"+id;
