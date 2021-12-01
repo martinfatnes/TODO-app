@@ -51,7 +51,6 @@ async function publicLists(){
     
 
     try{
-        const data = await getContentUnderCategory();
         
         for(let category of data[0]){
             tagSearch.push(category.tag);
@@ -84,11 +83,20 @@ async function publicLists(){
             div.appendChild(publisher);
             div.appendChild(tagParagraph);
             container.appendChild(div);
+            div.appendChild(publisher);
         }
-        div.appendChild(publisher);
-        container.appendChild(div);
       }
     catch (err) {
     console.log(err);
     }
+}
+
+async function getPublicLists(){
+    try{
+
+    }
+    catch(err){
+        console.log(err);
+    }
+    const data = await getContentUnderCategory();
 }

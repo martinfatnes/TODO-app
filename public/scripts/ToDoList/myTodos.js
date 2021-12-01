@@ -26,7 +26,6 @@ function TextEditor(){
             catch(err){
                 console.log(err);
             }
-            
         }
     });
 
@@ -167,9 +166,13 @@ function outPutContent(data){
             editTodoCard(category);
         })
 
-        if(TODAY > new Date(category.date)){
+        if(TODAY.getDate() === new Date(category.date).getDate()){
+            const endMessage = document.createElement('h1');
+            endMessage.innerHTML = "List expires today!";
+            div.appendChild(endMessage);
+        }
+        else if(TODAY > new Date(category.date)){
             const Overdue = document.createElement('h1');
-            Overdue.id = "overdue";
             const deleteBtn = document.createElement('button');
             deleteBtn.id = "delBtn";
             deleteBtn.innerHTML = "Delete list";
