@@ -82,6 +82,8 @@ button:hover{
 
 #create_card button{width: fit-content;}
 
+
+
 #publicContainer{
   display: grid;
   grid-template-columns: 300px 300px 300px;
