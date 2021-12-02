@@ -1,4 +1,3 @@
-
 function publicLists(data, filter){
     const container = document.getElementById('publicContainer');
     container.innerHTML = "";
@@ -21,8 +20,9 @@ function publicLists(data, filter){
                         if(category.id === items.categoryid){
                             const p = document.createElement('p');
                             const divContent = document.createElement('div');
-                            divContent.className = "contentDiv";
+                            divContent.className = "publicDiv";
                             const check = document.createElement('p');
+                            check.className = "checkbox";
                             if(items.done === true){
                                 check.innerHTML = "✔";
                             }
@@ -53,8 +53,9 @@ function publicLists(data, filter){
                 if(category.id === items.categoryid){
                     const p = document.createElement('p');
                     const divContent = document.createElement('div');
-                    divContent.className = "contentDiv";
+                    divContent.className = "publicDiv";
                     const check = document.createElement('p');
+                    check.className = "checkbox";
                     if(items.done === true){
                         check.innerHTML = "✔";
                     }
