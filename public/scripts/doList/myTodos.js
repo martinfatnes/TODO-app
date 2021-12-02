@@ -1,17 +1,17 @@
 let currentCategory;
 function TextEditor(){
     const showCard = document.getElementById("show_card_box");
-    const closeCardEditor = document.getElementById("close_card_box");
     const textEditor = document.getElementById("create_card");
     const text = document.getElementById("answer");
     const categoryname = document.getElementById("categoryname");
 
     showCard.addEventListener("click", function () {
-        textEditor.style.display = "block";
-    });
-    
-    closeCardEditor.addEventListener("click", function () {
-        textEditor.style.display = "none";
+        if(textEditor.style.display === "grid"){
+            textEditor.style.display = "none";
+        }
+        else{
+            textEditor.style.display = "grid";
+        }
     });
 
     categoryname.addEventListener("keyup", async function (event) {
@@ -93,6 +93,7 @@ function outPutContent(data){
             if(category.id === content.categoryid){
                 const contentDiv = document.createElement('div');
                 const completed = document.createElement('p');
+                completed.className = "checkbox";
                 completed.innerHTML = "✔";
 
                 completed.className = "cursorChange";
@@ -135,12 +136,23 @@ function outPutContent(data){
 
                 p.addEventListener('click', function(){
                     const inputField = document.createElement('input');
+                    const delteItemBtn = document.createElement('button');
+                    const modifyDiv = document.createElement('div');
+                    modifyDiv.className = "modifyItem";
                     if(contentDiv.children[2]){
                         contentDiv.removeChild(contentDiv.children[2]);
                     }
                     else{
                         inputField.placeholder = content.content;
-                        contentDiv.appendChild(inputField);
+                        delteItemBtn.innerHTML = "Delte item";
+                        modifyDiv.appendChild(inputField);
+                        modifyDiv.appendChild(delteItemBtn);
+                        contentDiv.appendChild(modifyDiv);
+
+                        delteItemBtn.addEventListener('click', async function(){
+                            await deleteContent(content.id);
+                            refreshPageContent();
+                        })
 
                         inputField.addEventListener('keydown', async function(event){
                             const key = event.keyCode;
@@ -223,7 +235,7 @@ function editTodoCard(cardInfo){
     const submit = document.createElement('button');
     submit.innerHTML = "Submit changes";
     const div = document.createElement('div');
-    div.className = "listcard";
+    div.className = "editItem";
     const cardHeader = document.createElement('input');
     cardHeader.type = "text";
     cardHeader.placeholder = "Header";
@@ -241,8 +253,12 @@ function editTodoCard(cardInfo){
     tag.innerHTML = cardInfo.tag;
     cardHeader.innerHTML = cardInfo.name;
 
+    const checkBoxDiv = document.createElement('div');
+    checkBoxDiv.appendChild(label);
+    checkBoxDiv.appendChild(public);
+
     div.appendChild(cardHeader);
-    div.appendChild(public);
+    div.appendChild(checkBoxDiv);
     div.appendChild(tag);
     div.appendChild(date);
     div.appendChild(submit);

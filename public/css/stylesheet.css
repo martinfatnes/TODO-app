@@ -1,186 +1,220 @@
-/*Css for hovedkontaineren*/
-main{
-    display: grid;
-    grid-template-columns: auto auto auto;
-    justify-content: center;
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.startPage{
-    display: grid;
-    grid-template-columns: auto;
-    padding: 100px;
+body{
+  font-family: 'Nunito', sans-serif;
+  font-size: 1rem;
+  background: whitesmoke;
 }
 
-.users{
-    display: grid;
-    padding: 100px;
+button{
+  background-color: rgb(44, 44, 44);
+  color: whitesmoke;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  text-align: center;
 }
 
-.users>input{
-    padding: 10px;
-    margin: 5px;
+button:hover{
+  background-color: rgb(228, 228, 228);
+  color: rgb(121, 121, 121);
+  border: solid rgb(121, 121, 121) 1px;
+  padding: 9px;
 }
 
-.users>button{
-    margin: 5px;
-    padding: 10px;
-    background-color: rgb(39, 39, 39);
-    color: whitesmoke;
+.container{
+  display: grid;
+  justify-content: center;
+  text-align: center;
 }
 
-#statusMsg{
-    text-align: center;
+.contentDiv{
+  display: grid;
+  grid-template-columns: 250px auto;
+  grid-template-rows: auto auto;
+  text-align: center;
+  text-align: start;
 }
 
-.userInputs{
-    border: solid green 1px;
-    padding: 10px;
+.contentDiv>.modifyItem{
+  grid-column-start: 1;
+  font-size: large;
 }
 
-.userBtns{
-    border: solid green 1px;
-    padding: 10px;
+.contentDiv>.modifyItem>input{
+  padding: 9px;
 }
 
-.userBtns:hover{
-    background-color: green;
-    padding: 10px;
+.contentDiv>.cursorChange{
+  grid-column-start: 2;
 }
 
-/*HOMEPAGE CONTENT STUFF*/
-.homepage{
-    display: grid;
-    grid-template-columns: auto;
-    padding: 100px;
+.contentDiv>input{
+  grid-row-start: 1;
 }
 
-
-/*Aside menu*/
-
-.sideMenu{
-    margin-top: 70px;
+.contentDiv>p:hover{
+  background-color: grey;
+  cursor: pointer;
 }
 
-
-#dashboardMenu{
-    grid-area: "dashboardMenu";
+#create_card{
+  display: none;
+  grid-template-columns: auto;
+  border: solid rgb(146, 146, 146) 1px;
+  background-color: rgb(236, 236, 236);
+  padding: 20px;
 }
 
-.collapsible{
-    background-color: #eee;
-    color: #444;
-    cursor: pointer;
-    padding: 18px;
-    width: 100%;
-    border: none;
-    text-align: left;
-    outline: none;
-    font-size: 15px;
+.userCategory>li{
+  padding: 10px;
 }
 
-.active, .collapsible:hover {
-    background-color: #ccc;
+#create_card button{width: fit-content;}
+
+#publicContainer{
+  display: grid;
+  grid-template-columns: 300px 300px 300px;
+  padding: 40px;
 }
 
-.content {
-    padding: 0 18px;
-    display: none;
-    overflow: hidden;
-    background-color: #f1f1f1;
+#listcards{
+  display: grid;
+  grid-template-columns: 300px 300px 300px;
+  padding: 40px;
 }
 
-#dashboardMenu{
-    display: none;
+#listcards>.editItem{
+  grid-column-start: 2;
 }
 
-header{
-    display: grid;
-    background-color: rgb(51, 51, 51);
+.listcard{
+  display: grid;
+  grid-template-columns: auto;
+  padding: 20px;
+  border: solid rgb(146, 146, 146) 1px;
+  background-color: rgb(236, 236, 236);
 }
 
-header>div{
-    display: grid;
-    grid-template-columns: auto auto auto auto auto;
+.listcard>h2{
+  text-transform: uppercase;
+  border-bottom: grey 1px solid;
 }
 
-/*Account home page thing*/
+.listcard>button{
+  height: 30px;
+}
+
+.cursorChange{
+  cursor: pointer;
+}
+
+.listcard h2{font-size: 1.5rem; text-align: center;}
+
+
 .accountPage{
-    display: grid;
-    grid-template-columns: auto;
-    padding: 100px;
+  display: grid;
+  justify-content: center;
 }
 
-.inputChange{
-    padding: 10px;
-    margin: 5px;
-}
-
-.dashBoardBtn{
-    margin: 5px;
-    padding: 10px;
-    background-color: rgb(39, 39, 39);
-    color: whitesmoke;
-}
-
-.dashBoardBtn:hover{
-    background-color: rgb(105, 105, 105);
-}
-
-.deleteUserBtn{
-    margin: 5px;
-    padding: 10px;
-    background-color: rgb(39, 39, 39);
-    color: whitesmoke;
-}
-
-.deleteUserBtn:hover{
-    background-color: rgb(145, 0, 0);
+#form>input{
+  padding: 10px;
+  background-color: rgb(233, 233, 233);
 }
 
 #formBtn:hover{
-    background-color: rgb(168, 168, 168);
-    cursor: pointer;
-}
-  
-
-/* Public list*/
-.publicList{
-    display: grid;
-    grid-template-columns: auto auto auto;
-    padding: 100px;
-}
-
-.publicList>div{
-    display: grid;
-    grid-template-columns: auto;
-    margin: 10px;
-    text-align: center;
-    padding: 5px;
-}
-
-.header{
-    text-align: center;
-}
-
-.navBar{
-    position: fixed;
-}
-
-.listcard {
-    padding: 15px;
-}
-
-input {
-    border: 1px solid #eee;
-    padding: 6px;
-    border-radius: 5px;
-}
-.w100{
-    width: 100%;
+  cursor: pointer;
+  background-color: rgb(196, 196, 196);
 }
 
 .tagfield{
-    
-    justify-content: space-between;
-    text-align: center;
+  padding: 10px;
+}
+
+.tagfield>input{
+  padding: 5px;
+}
+
+.navBar{
+  position: fixed;
+}
+
+#dashboardMenu{
+  display: none;
+}
+
+.publicDiv{
+  display: grid;
+  grid-template-columns: 250px auto;
+  text-align: start;
+}
+
+.users{
+  display: grid;
+  justify-content: center;
+  padding: 300px;
+}
+
+.users>input{
+  padding: 10px;
+}
+
+.editItem{
+  display: grid;
+  justify-content: center;
+}
+
+.editItem>input{
+  padding: 10px;
+}
+
+.editItem>div{
+  text-align: start;
+}
+
+.editItem>div>label{
+  padding-right: 5px;
+}
+
+@media only screen and (max-width: 900px) {
+  #publicContainer{
+    display: grid;
+    grid-template-columns: auto auto;
+    padding: 40px;
+  }
+
+  #listcards{
+    display: grid;
+    grid-template-columns: auto auto;
+    padding: 40px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  #publicContainer{
+    display: grid;
+    grid-template-columns: auto;
+    padding: 40px;
+  }
+
+  #listcards{
+    display: grid;
+    grid-template-columns: auto;
+    padding: 40px;
+  }
+
+  .navBar{
+    display: grid;
+    position: relative;
+  }
+
+  .users{
+    padding: 0;
+  }
 }

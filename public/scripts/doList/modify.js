@@ -1,5 +1,4 @@
 //DELETE FUNCTIONS_____________________________________
-
 async function deleteCategory(id) {
   const url = `/api/category/${id}`;
   const token = localStorage.getItem("token");
@@ -50,9 +49,8 @@ async function deleteContent(id) {
     if (respons.status != 200) {
       throw "Could not find";
     }
-
-    refresh();
-    return data;
+    
+    return data.msg;
   } catch (err) {
     console.log(err);
   }
@@ -82,7 +80,6 @@ async function setDate(categoryId, date) {
       throw "Could not find";
     }
 
-    refresh();
     return data;
   } catch (err) {
     console.log(err);
@@ -113,7 +110,6 @@ async function updateContent(content, id) {
       throw "Could not find";
     }
 
-    refresh();
     return data;
   } catch (err) {
     console.log(err);
