@@ -27,12 +27,12 @@ function categoryPage(){
       } else {
         data.forEach((category) => {
           elm.innerHTML +=
-           `<li id='${category.id}'><b id="changeName-${category.id}" onClick="createInput('${category.id}')">${category.name}</b>
+           `<br><ul class='categoryId' id='${category.id}'><b id="changeName-${category.id}" onClick="createInput('${category.id}')">${category.name}</b>
             <br />- create by ${category.username} is public: ${category.share
                ?
                 " <b onclick='changeCategoryShare("+ category.id+", false)'>✔</b> "
                  : "<b onclick='changeCategoryShare("+ category.id+", true)'>❌</b>"}
-           <i>#${category.tag}</i><br /><button onclick="removeCategory(${category.id})">DELETE</button></li>`;
+           <i>#${category.tag}</i><br /><button onclick="removeCategory(${category.id})">DELETE</button></ul><br>`;
         });
       }
       div.appendChild(elm);
@@ -68,7 +68,11 @@ function createInput (id){
         changeCategoryName(name, id);
       }
   })
-  document.getElementById(id+'').appendChild(nameInput)
+  if(document.getElementById(id+'').children[6]){
+    document.getElementById(id+'').removeChild(document.getElementById(id+'').children[6]);
+  }else{
+    document.getElementById(id+'').appendChild(nameInput)  
+  }
 }
 
 // Remove the category from the view
